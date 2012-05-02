@@ -1,0 +1,96 @@
+<%
+  density=@snapshot.measure('violations_density')
+  weighted_violations=@snapshot.measure('weighted_violations')
+
+  violations=@snapshot.measure('violations')
+  new_violations=@snapshot.measure('new_violations')
+
+  blocker_violations = @snapshot.measure('blocker_violations')
+  new_blocker_violations = @snapshot.measure('new_blocker_violations')
+
+  critical_violations = @snapshot.measure('critical_violations')
+  new_critical_violations = @snapshot.measure('new_critical_violations')
+
+  major_violations = @snapshot.measure('major_violations')
+  new_major_violations = @snapshot.measure('new_major_violations')
+
+  minor_violations = @snapshot.measure('minor_violations')
+  new_minor_violations = @snapshot.measure('new_minor_violations')
+
+  info_violations = @snapshot.measure('info_violations')
+  new_info_violations = @snapshot.measure('new_info_violations')
+
+  measures=[blocker_violations,critical_violations,major_violations,minor_violations,info_violations,violations]
+  values=measures.map{|m| m ? (m.value||0) : 0}
+  new_values=[new_blocker_violations,new_critical_violations,new_major_violations,new_minor_violations,new_info_violations,new_violations]
+  priorities=['BLOCKER','CRITICAL','MAJOR','MINOR','INFO','']
+
+  if dashboard_configuration.selected_period?
+    tmp_values=measures.map{|m| m ? (m.variation(dashboard_configuration.period_index)||0) : 0}
+    new_values=new_values.map{|m| m ? (m.variation(dashboard_configuration.period_index)||0) : 0}
+    cleared_values=tmp_values.each_with_index.map{|n,i| (n - new_values[i]).abs}
+  max=new_values.zip(cleared_values).map{|val| val.inject(:+).abs}.max
+  else
+  max=values.map{|val| val.abs}.max
+  end
+%>
+<table width="100%">
+  <tr>
+    <td valign="top">
+    <div class="dashbox">
+    <h3>Weighted Violations</h3>
+    <div class="marginbottom10">
+      <span class="big">
+      <%= format_measure(weighted_violations, :url => url_for_drilldown(Metric::WEIGHTED_VIOLATIONS, {:highlight => Metric::WEIGHTED_VIOLATIONS})) -%>
+      </span>
+      <%= dashboard_configuration.selected_period? ? format_variation(weighted_violations) : trend_icon(weighted_violations) -%>
+    </div>
+
+    <h3><%= message('widget.rules.rules_compliance') -%></h3>
+    <div>
+      <span class="big">
+      <%= format_measure(density, :url => url_for_drilldown(Metric::WEIGHTED_VIOLATIONS, {:highlight => Metric::WEIGHTED_VIOLATIONS})) -%>
+      </span>
+      <%= dashboard_configuration.selected_period? ? format_variation(density) : trend_icon(density) -%>
+    </div>
+    </div>
+  </td>
+  <td valign="top" nowrap>
+    <table class="clear width100">
+    <%for idx in 0..5%>
+      <tr>
+      <% if priorities[idx].empty? %>
+        <td>&nbsp;</td>
+        <td> &nbsp;Total</td>
+      <% else %>
+        <td><%= image_tag 'priority/'.concat(priorities[idx]).concat('.png')%></td>
+        <td> &nbsp;<%= link_to message(priorities[idx].downcase), {:controller => 'drilldown', :action => 'violations', :id => @project.key, :priority => priorities[idx], :period => dashboard_configuration.period_index} %></td>
+      <% end %>
+      <td style="padding: 0 10px;" align="right">
+        <%= format_measure(measures[idx]) -%>
+      </td>
+      <td>
+        <% if dashboard_configuration.selected_period? %>
+        <b>(-<%= cleared_values[idx].to_i -%>/+<%= new_values[idx].to_i -%>)</b>
+        <% else %>
+        <%= trend_icon(values[idx], :empty => true) -%>
+        <% end %>
+      </td>
+      <td align="left" style="padding-bottom:2px; padding-top:2px;">
+        <% if max > 0 %>
+        <% if dashboard_configuration.selected_period? %>
+        <% clearedSize=(35 * (cleared_values[idx] / max)).to_i%>
+        <div class="barchart" style="width: <%= 35-clearedSize -%>px"><div style="width: 100%;;background-color:#ffffff;"></div></div>
+        <%= barchart(:width => clearedSize, :color => '#078C00') %>
+        <%= barchart(:width => 35, :percent => ((100 * new_values[idx] / max).to_i), :color => '#cc0000') %>
+        <% else %>
+        <%= barchart(:width => 70, :percent => (100 * values[idx] / max).to_i) %>
+        <% end %>
+        <% end %>
+      </td>
+      </tr>
+    <%end%>
+    </table>
+  </td>
+  </tr>
+</table>
