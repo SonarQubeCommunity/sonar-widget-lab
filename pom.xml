@@ -9,11 +9,11 @@
     <relativePath>../parent</relativePath>
   </parent>
 
-  <artifactId>sonar-shaw-widgets</artifactId>
+  <artifactId>sonar-widget-lab</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>sonar-plugin</packaging>
 
-  <name>Shaw Widgets</name>
+  <name>Widget Lab</name>
   <description>Additional Sonar widgets</description>
   <url>http://docs.codehaus.org/display/SONAR/Shaw+Widgets+Plugin</url>
   <inceptionYear>2012</inceptionYear>
