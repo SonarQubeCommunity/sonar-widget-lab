@@ -1,5 +1,5 @@
 /*
- * Shaw Widgets
+ * Widget Lab
  * Copyright (C) 2012 Shaw Industries
  * dev@sonar.codehaus.org
  *
