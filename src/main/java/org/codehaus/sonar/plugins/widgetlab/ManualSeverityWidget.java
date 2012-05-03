@@ -17,20 +17,30 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.codehaus.sonar.plugins.shawWidgets;
+package org.codehaus.sonar.plugins.widgetlab;
 
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
+/**
+ *
+ * @author gcampb2
+ */
+import org.sonar.api.web.*;
 
-import org.junit.Test;
+@UserRole(UserRole.USER)
+@Description("Shows reviews with a manual severity")
+@WidgetCategory({"Reviews"})
+public class ManualSeverityWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
-
-public class AltRulesComplianceWidgetTest {
-  @Test
-  public void testWidgetDefinition() {
-    AltRulesComplianceWidget widget = new AltRulesComplianceWidget();
-    assertThat(widget.getId(), notNullValue());
-    assertThat(widget.getTitle(), notNullValue());
-    assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());
+  public String getId() {
+    return "manual_severity_reviews";
   }
+
+  public String getTitle() {
+    return "Manual Severity Reviews";
+  }
+
+  @Override
+  protected String getTemplatePath() {
+    return "/manual_severity_reviews_widget.html.erb";
+  }
+
 }

@@ -17,30 +17,21 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.codehaus.sonar.plugins.shawWidgets;
+package org.codehaus.sonar.plugins.widgetlab;
+
+import java.util.Arrays;
+import java.util.List;
+import org.sonar.api.SonarPlugin;
 
 /**
  *
  * @author gcampb2
  */
-import org.sonar.api.web.*;
+public class WidgetLabPlugin extends SonarPlugin {
 
-@UserRole(UserRole.USER)
-@Description("Shows reviews with a manual severity")
-@WidgetCategory({"Reviews"})
-public class ManualSeverityWidget extends AbstractRubyTemplate implements RubyRailsWidget {
-
-  public String getId() {
-    return "manual_severity_reviews";
-  }
-
-  public String getTitle() {
-    return "Manual Severity Reviews";
-  }
-
-  @Override
-  protected String getTemplatePath() {
-    return "/manual_severity_reviews_widget.html.erb";
+  public List getExtensions() {
+    return Arrays.asList(AltRulesComplianceWidget.class,
+      ManualSeverityWidget.class);
   }
 
 }

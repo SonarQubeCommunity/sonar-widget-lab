@@ -17,26 +17,21 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.codehaus.sonar.plugins.shawWidgets;
+package org.codehaus.sonar.plugins.widgetlab;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.hamcrest.Matchers.greaterThan;
+import org.codehaus.sonar.plugins.widgetlab.AltRulesComplianceWidget;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
+import org.junit.Test;
 
-public class ShawWidgetsPluginTest {
 
-  private ShawWidgetsPlugin plugin;
-
-  @Before
-  public void setUp() {
-    plugin = new ShawWidgetsPlugin();
-  }
-
+public class AltRulesComplianceWidgetTest {
   @Test
-  public void testPluginDefinition() {
-    assertThat(plugin.getExtensions().size(), greaterThan(0));
+  public void testWidgetDefinition() {
+    AltRulesComplianceWidget widget = new AltRulesComplianceWidget();
+    assertThat(widget.getId(), notNullValue());
+    assertThat(widget.getTitle(), notNullValue());
+    assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());
   }
 }

@@ -17,21 +17,22 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.codehaus.sonar.plugins.shawWidgets;
+package org.codehaus.sonar.plugins.widgetlab;
 
-import java.util.Arrays;
-import java.util.List;
-import org.sonar.api.SonarPlugin;
+import org.codehaus.sonar.plugins.widgetlab.ManualSeverityWidget;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
-/**
- *
- * @author gcampb2
- */
-public class ShawWidgetsPlugin extends SonarPlugin {
+import org.junit.Test;
 
-  public List getExtensions() {
-    return Arrays.asList(AltRulesComplianceWidget.class,
-      ManualSeverityWidget.class);
+
+public class ManualSeverityWidgetTest {
+  @Test
+  public void testWidgetDefinition() {
+    ManualSeverityWidget widget = new ManualSeverityWidget();
+    assertThat(widget.getId(), notNullValue());
+    assertThat(widget.getTitle(), notNullValue());
+    assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());
   }
 
 }
