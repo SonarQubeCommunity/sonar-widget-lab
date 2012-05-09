@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>sonar-widget-lab-plugin</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>sonar-plugin</packaging>
 
   <name>Widget Lab</name>
@@ -58,4 +58,10 @@
     </dependency>
   </dependencies>
 
+
+  <scm>
+    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/tags/1.0</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/tags/1.0</developerConnection>
+    <url>scm:svn:https://svn.codehaus.org/sonar-plugins/tags/1.0</url>
+  </scm>
 </project>
