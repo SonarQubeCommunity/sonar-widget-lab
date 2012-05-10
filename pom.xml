@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>sonar-widget-lab-plugin</artifactId>
-  <version>1.0</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>sonar-plugin</packaging>
 
   <name>Widget Lab</name>
@@ -37,16 +37,6 @@
     </developer>
   </developers>
 
-  <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/widget-lab</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/widget-lab</developerConnection>
-    <url>http://svn.sonar-plugins.codehaus.org</url>
-  </scm>
-  <issueManagement>
-    <system>JIRA</system>
-    <url>http://jira.codehaus.org/browse/SONARPLUGINS/component/15490</url>
-  </issueManagement>
-
   <properties>
     <sonar.version>2.12</sonar.version>
     <sonar.pluginClass>org.codehaus.sonar.plugins.widgetlab.WidgetLabPlugin</sonar.pluginClass>
@@ -68,4 +58,10 @@
     </dependency>
   </dependencies>
 
+
+  <scm>
+    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/tags/sonar-widget-lab-plugin-1.0</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/tags/sonar-widget-lab-plugin-1.0</developerConnection>
+    <url>scm:svn:https://svn.codehaus.org/sonar-plugins/tags/sonar-widget-lab-plugin-1.0</url>
+  </scm>
 </project>
