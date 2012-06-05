@@ -26,12 +26,13 @@ import org.sonar.api.SonarPlugin;
 /**
  *
  * @author gcampb2
+ * @author Patroklos Papapetrou
  */
 public class WidgetLabPlugin extends SonarPlugin {
 
   public List getExtensions() {
     return Arrays.asList(AltRulesComplianceWidget.class,
-      ManualSeverityWidget.class);
+      ManualSeverityWidget.class, DocumentationWidget.class, DuplicationsWidget.class);
   }
 
 }
