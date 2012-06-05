@@ -38,7 +38,7 @@
   <tr>
     <td valign="top">
     <div class="dashbox">
-    <h3>Weighted Violations</h3>
+    <h3><%= message('widget.rules-alt.title') -%></h3>
     <div class="marginbottom10">
       <span class="big">
       <%= format_measure(weighted_violations, :url => url_for_drilldown(Metric::WEIGHTED_VIOLATIONS, {:highlight => Metric::WEIGHTED_VIOLATIONS})) -%>
@@ -61,7 +61,7 @@
       <tr>
       <% if priorities[idx].empty? %>
         <td>&nbsp;</td>
-        <td> &nbsp;Total</td>
+        <td> &nbsp;<%= message('widget.rules-alt.total.suffix') -%></td>
       <% else %>
         <td><%= image_tag 'priority/'.concat(priorities[idx]).concat('.png')%></td>
         <td> &nbsp;<%= link_to message(priorities[idx].downcase), {:controller => 'drilldown', :action => 'violations', :id => @project.key, :priority => priorities[idx], :period => dashboard_configuration.period_index} %></td>
