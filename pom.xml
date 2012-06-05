@@ -35,6 +35,10 @@
       <name>G. Ann Campbell</name>
       <organization>Shaw Industries</organization>
     </developer>
+    <developer>
+      <id>ppapapetrou</id>
+      <name>Patroklos Papapetrou</name>
+    </developer>
   </developers>
 
   <properties>
