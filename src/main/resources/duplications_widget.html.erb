@@ -28,6 +28,11 @@
           </p>
        </div>
       </td>
+<%
+  useless_code=measure('total-useless-lines')
+  if useless_code
+%>
+
       <td valign="top" width="50%">
         <div class="dashbox">
           <p class="title"><%= message('widget.duplications.useless-duplications-title') -%></p>
@@ -39,6 +44,9 @@
           </p>
         </div>
       </td>
+<%
+  end
+%>
     </tr>
   </tbody>
 </table>
