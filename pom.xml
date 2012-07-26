@@ -42,7 +42,7 @@
   </developers>
 
   <properties>
-    <sonar.version>2.12</sonar.version>
+    <sonar.version>3.1</sonar.version>
     <sonar.pluginClass>org.codehaus.sonar.plugins.widgetlab.WidgetLabPlugin</sonar.pluginClass>
   </properties>
 

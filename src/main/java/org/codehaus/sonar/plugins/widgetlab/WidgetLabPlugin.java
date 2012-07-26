@@ -31,7 +31,7 @@ import org.sonar.api.SonarPlugin;
 public class WidgetLabPlugin extends SonarPlugin {
 
   public List getExtensions() {
-    return Arrays.asList(AltRulesComplianceWidget.class,
+    return Arrays.asList(AltRulesComplianceWidget.class,HtmlWidget.class,
       ManualSeverityWidget.class, DocumentationWidget.class, DuplicationsWidget.class);
   }
 
