@@ -73,7 +73,7 @@
         <% if dashboard_configuration.selected_period? %>
         <b>(-<%= cleared_values[idx].to_i -%>/+<%= new_values[idx].to_i -%>)</b>
         <% else %>
-        <%= trend_icon(values[idx], :empty => true) -%>
+        <%= trend_icon(measures[idx], :empty => true) -%>
         <% end %>
       </td>
       <td align="left" style="padding-bottom:2px; padding-top:2px;">
