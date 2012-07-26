@@ -46,6 +46,11 @@
     <sonar.pluginClass>org.codehaus.sonar.plugins.widgetlab.WidgetLabPlugin</sonar.pluginClass>
   </properties>
 
+  <issueManagement>
+    <system>JIRA</system>
+    <url>http://jira.codehaus.org/browse/SONARPLUGINS/component/15490</url>
+  </issueManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.codehaus.sonar</groupId>
