@@ -35,6 +35,6 @@ public class WidgetLabPluginTest {
 
   @Test
   public void testPluginDefinition() {
-    assertThat(plugin.getExtensions().size(), equalTo(5));
+    assertThat(plugin.getExtensions().size(), equalTo(6));
   }
 }

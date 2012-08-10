@@ -1,0 +1,36 @@
+<%
+
+   alert_conditions='project_measures.alert_text is not null and project_measures.text_value is null and project_measures.snapshot_id = :sid'
+   alert_values={
+        :sid => @snapshot.id,
+    }
+
+    measures=ProjectMeasure.find(:all,
+                                 :select => 'project_measures.id,project_measures.value,project_measures.metric_id,project_measures.snapshot_id,project_measures.rule_id,project_measures.rule_priority,project_measures.text_value,project_measures.characteristic_id,project_measures.alert_status,project_measures.alert_text',
+                                 :conditions => [alert_conditions, alert_values ],
+                                 :order => 'project_measures.alert_status',
+                                 :limit => 20)
+%>
+    <table class="data">
+      <thead>
+      <tr>
+        <th colspan="2"/>
+      </tr>
+      </thead>
+      <tbody>
+<%     measures.each do |measure| 
+      metric = measure.metric %>
+
+        <tr class="<%= cycle 'even', 'odd', :name => ('alerts-widget-list') -%>">
+          <td class="left">
+            <%= measure.alert_text -%>
+          </td>
+          <td class="right nowrap">
+            <%= format_measure(measure, :url => url_for_drilldown(measure))%>
+          </td>
+        </tr>
+      <%
+         end
+      %>
+      </tbody>
+    </table>
