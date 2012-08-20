@@ -1,0 +1,37 @@
+<%
+ def period_names
+    p1=Property.value('sonar.timemachine.period1', nil, 'previous_analysis')
+    p2=Property.value('sonar.timemachine.period2', nil, '5')
+    p3=Property.value('sonar.timemachine.period3', nil, '30')
+    [period_name(p1), period_name(p2), period_name(p3)]
+  end
+
+  def period_name(property)
+    if property=='previous_analysis'
+      message('delta_since_previous_analysis')
+    elsif property =~ /^[\d]+(\.[\d]+){0,1}$/
+      # is integer
+      message('delta_over_x_days', :params => property)
+    elsif property =~ /\d{4}-\d{2}-\d{2}/
+      message('delta_since', :params => property)
+    elsif !property.blank?
+      message('delta_since_version', :params => property)
+    else
+      nil
+    end
+  end
+%>
+<div class="line-block">
+  <div class="operations">
+
+  <form action="<%= url_for :overwrite_params => {:period => nil} -%>" style="display: inline" method="get">
+    <input type="hidden" name="did" value="<%= @dashboard.id -%>"/>
+    <select name="period" onchange="submit()" class="small">
+        <option value=""><%= message('time_changes') -%>...</option>
+    <% period_names.each_with_index do |name, index| %>
+        <option value="<%= index+1 -%>" <%= 'selected' if (params[:period]).to_i==index+1 -%>><%= name -%></value>
+    <% end %>
+    </select>
+  </form>
+  </div>
+</div>
