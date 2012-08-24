@@ -23,7 +23,7 @@ import org.sonar.api.web.*;
 
 
 @UserRole(UserRole.USER)
-@Description("Restores the differential dropdown to global dashboards.")
+@Description("A differential dropdown for global dashboards.")
 @WidgetCategory({"Global"})
 @WidgetScope("GLOBAL")
 public class DifferentialDropdownWidget  extends AbstractRubyTemplate implements RubyRailsWidget {
