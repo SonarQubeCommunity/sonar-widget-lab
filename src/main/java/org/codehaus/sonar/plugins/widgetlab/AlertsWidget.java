@@ -36,7 +36,7 @@ public class AlertsWidget extends AbstractRubyTemplate implements RubyRailsWidge
   }
 
   public String getTitle() {
-    return "Alerts (enhanced version)";
+    return "Alerts (advanced version)";
   }
 
   @Override

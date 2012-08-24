@@ -10,23 +10,55 @@
                                  :conditions => [alert_conditions, alert_values ],
                                  :order => 'project_measures.alert_status',
                                  :limit => 20)
+   title = message('widget.alt_alerts.title')
+   if measures.empty?
 %>
+
+<h3><%= title -%></h3>
+<span class="empty_widget"><%= message('widget.alt_alerts.no_alerts') -%></span>
+
+<%
+   else
+%>
+    <div class="line-block">
+      <h3><%= title -%></h3>
+    </div>
     <table class="data">
       <thead>
       <tr>
-        <th colspan="2"/>
+        <th colspan="3"/>
       </tr>
       </thead>
       <tbody>
+
 <%     measures.each do |measure| 
       metric = measure.metric %>
 
-        <tr class="<%= cycle 'even', 'odd', :name => ('alerts-widget-list') -%>">
+        <tr style="text-decoration: none;" class="<%= cycle 'even', 'odd', :name => ('alerts-widget-list') -%>">
           <td class="left">
             <%= measure.alert_text -%>
           </td>
-          <td class="right nowrap">
+          <td class="right">
             <%= format_measure(measure, :url => url_for_drilldown(measure))%>
+          </td>
+          
+<%
+  if metric && metric.worst_value && metric.best_value
+    if metric.direction>0
+      diff=100-(100/metric.best_value*measure.value)
+    else
+      if metric.worst_value>0 
+        diff=100/metric.worst_value*measure.value
+      else
+        diff=0
+      end
+    end
+  end  
+%>
+          <td class="barchart">
+            <div class="barchart" style="width: <%= diff -%>%">
+              <div style="width: 100%;background-color:#777;"></div>
+            </div>
           </td>
         </tr>
       <%
@@ -34,3 +66,6 @@
       %>
       </tbody>
     </table>
+<%
+   end
+%>
