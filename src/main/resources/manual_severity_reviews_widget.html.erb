@@ -1,12 +1,9 @@
 <%
-  profile = @project.profile
-
   search_options = {}
   search_options['projects'] = @project.key
   search_options['manual_severity'] = true
   search_options['sort'] = 'updated_at'
   search_options['statuses'] = "#{Review::STATUS_OPEN},#{Review::STATUS_REOPENED}"
-
   manualSeverityReviews = [];
 
   found_reviews = Review.search(search_options)
@@ -21,6 +18,7 @@
     end #unless reviews.empty
   end #unless found_reviews.empty
   priorities=['Info','Minor','Major','Blocker','Critical']
+
 %>
 
 <h3><%= message('widget.manual_severity_reviews.title') -%></h3>
