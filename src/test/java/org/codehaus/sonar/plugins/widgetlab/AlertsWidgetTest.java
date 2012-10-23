@@ -19,7 +19,6 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
-import org.codehaus.sonar.plugins.widgetlab.AltRulesComplianceWidget;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
