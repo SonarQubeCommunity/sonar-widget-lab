@@ -67,12 +67,12 @@
     </dependency>
   </dependencies>
 
-
   <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/widget-lab</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/widget-lab</developerConnection>
-    <url>http://svn.codehaus.org/sonar-plugins/trunk/widget-lab</url>
+    <connection>scm:git:https://github.com/SonarCommunity/sonar-widget-lab.git</connection>
+    <developerConnection>scm:git:git@github.com:SonarCommunity/sonar-widget-lab.git</developerConnection>
+    <url>https://github.com/SonarCommunity/sonar-widget-lab</url>
   </scm>
+
   <build>
   	<pluginManagement>
   		<plugins>
