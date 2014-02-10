@@ -22,8 +22,21 @@ package org.codehaus.sonar.plugins.widgetlab;
 import org.sonar.api.web.*;
 
 @UserRole(UserRole.USER)
-@Description("Shows weighted violations, in addition to Rules Compliance Index.")
-@WidgetCategory({"Rules"})
+@Description("Shows weighted issues, in addition to Rules Compliance Index.")
+@WidgetCategory({"Technical Debt"})
+@WidgetProperties({
+    @WidgetProperty(key = "showCompliance",
+        description = "Show Rules Compliance",
+        type=WidgetPropertyType.BOOLEAN,
+        defaultValue = "true"
+    ),
+    @WidgetProperty(key = "showTechDebt",
+        description = "Show Technical Debt",
+        type=WidgetPropertyType.BOOLEAN,
+        defaultValue = "true"
+    )
+})
+
 public class AltRulesComplianceWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
   public String getId() {
@@ -31,7 +44,7 @@ public class AltRulesComplianceWidget extends AbstractRubyTemplate implements Ru
   }
 
   public String getTitle() {
-    return "WRV Rules Compliance";
+    return "Alt Rules Compliance";
   }
 
   @Override
