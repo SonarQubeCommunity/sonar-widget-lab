@@ -51,7 +51,7 @@ public class HtmlWidget  extends AbstractRubyTemplate implements RubyRailsWidget
   @Override
   protected String getTemplatePath() {
     return "/html_widget.html.erb";
-//    return "C:/workspaces/sonarPlugins/widget-lab/src/main/resources/html_widget.html.erb";
+
   }
 
 }
