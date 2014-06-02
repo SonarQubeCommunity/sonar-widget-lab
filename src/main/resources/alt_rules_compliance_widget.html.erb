@@ -75,7 +75,7 @@
             <br/>
             <span style="font-weight: bold">
               <%= message('widget.rules.removed') -%>&nbsp;
-              <span class="varb"><%= number_with_precision(estimated_cleared_technical_debt, :precision => 1) -%></span>
+               <span class="varb"><%= Internal.i18n.formatLongDuration(estimated_cleared_technical_debt.to_i, 'SHORT') -%></span>
             </span>
           <% end %>
         <% end %>
