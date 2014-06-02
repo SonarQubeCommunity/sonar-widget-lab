@@ -33,7 +33,7 @@
     <developer>
       <id>ganncamp</id>
       <name>G. Ann Campbell</name>
-      <organization>Shaw Industries</organization>
+      <organization>SonarSource</organization>
     </developer>
     <developer>
       <id>ppapapetrou</id>
@@ -42,7 +42,7 @@
   </developers>
 
   <properties>
-    <sonar.version>4.1</sonar.version>
+    <sonar.version>4.3</sonar.version>
     <sonar.pluginClass>org.codehaus.sonar.plugins.widgetlab.WidgetLabPlugin</sonar.pluginClass>
   </properties>
 
