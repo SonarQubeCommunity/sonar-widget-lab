@@ -44,7 +44,7 @@
     <h3><%= message('widget.rules-alt.title') -%></h3>
     <div class="marginbottom10">
       <span class="big">
-      <%= format_measure(weighted_violations, :url => url_for_drilldown(Metric::WEIGHTED_VIOLATIONS, {:highlight => Metric::WEIGHTED_VIOLATIONS})) -%>
+      <%= format_measure(weighted_violations, :url => url_for_drilldown('weighted_violations', {:highlight => 'weighted_violations'})) -%>
       </span>
       <%= dashboard_configuration.selected_period? ? format_variation(weighted_violations) : trend_icon(weighted_violations) -%>
     </div>
@@ -85,7 +85,7 @@
       <h3><%= message('widget.rules.rules_compliance') -%></h3>
       <div>
         <span class="big">
-        <%= format_measure(density, :url => url_for_drilldown(Metric::WEIGHTED_VIOLATIONS, {:highlight => Metric::WEIGHTED_VIOLATIONS})) -%>
+        <%= format_measure(density, :url => url_for_drilldown('weighted_violations', {:highlight => 'weighted_violations'})) -%>
         </span>
         <%= dashboard_configuration.selected_period? ? format_variation(density) : trend_icon(density) -%>
       </div>
