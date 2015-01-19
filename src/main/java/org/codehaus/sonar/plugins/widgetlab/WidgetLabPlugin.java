@@ -19,21 +19,53 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.codehaus.sonar.plugins.widgetlab.logo.LogoDashboardWidget;
+import org.codehaus.sonar.plugins.widgetlab.logo.LogoMetrics;
+import org.codehaus.sonar.plugins.widgetlab.logo.LogoPluginConst;
+import org.codehaus.sonar.plugins.widgetlab.logo.LogoPostJob;
+import org.codehaus.sonar.plugins.widgetlab.logo.LogoWebService;
+import org.sonar.api.Extension;
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
 import org.sonar.api.SonarPlugin;
 
 /**
- *
+ * Widget Lab plugin
+ * 
  * @author gcampb2
  * @author Patroklos Papapetrou
+ * @author jbadenas
  */
+@Properties({
+  @Property(key = LogoPluginConst.CONFKEY_IMG_LOCATION, name = "Image location", description = "Image location inside the sources or via URL (ex: sources:/src/main/site/logo.png or http://www.myproj.org/img/logo.png)", project = true, global = true),
+  @Property(key = LogoPluginConst.CONFKEY_IMG_STYLE, name = "Image css style", description = "Image css style (ex: width:200px; display: block; margin: auto;)", project = true, global = true),
+  @Property(key = LogoPluginConst.CONFKEY_LINK, name = "Project url", description = "Project url", project = true, global = true),
+  @Property(key = LogoPluginConst.CONFKEY_ALT_TEXT, name = "Alternative text", description = "Alternative text", project = true,
+      global = true) })
 public class WidgetLabPlugin extends SonarPlugin {
 
-  public List getExtensions() {
-    return Arrays.asList(AltRulesComplianceWidget.class,HtmlWidget.class,
-      ManualSeverityWidget.class, DifferentialDropdownWidget.class,
-      AlertsWidget.class);
-  }
+  /**
+   * @return classes to include in the plugin
+   */
+  public final List<Class<? extends Extension>> getExtensions() {
+    List<Class<? extends Extension>> extensions = new ArrayList<Class<? extends Extension>>();
 
+    // Widget Lab
+    extensions.add(AlertsWidget.class);
+    extensions.add(AltRulesComplianceWidget.class);
+    extensions.add(DifferentialDropdownWidget.class);
+    extensions.add(HtmlWidget.class);
+    extensions.add(ManualSeverityWidget.class);
+    
+    // Logo
+    extensions.add(LogoDashboardWidget.class);
+    extensions.add(LogoMetrics.class);
+    extensions.add(LogoPostJob.class);
+    extensions.add(LogoWebService.class);
+
+    return extensions;
+  }
 }

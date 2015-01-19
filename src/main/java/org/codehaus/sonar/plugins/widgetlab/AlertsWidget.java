@@ -19,29 +19,42 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
+import org.sonar.api.web.AbstractRubyTemplate;
+import org.sonar.api.web.Description;
+import org.sonar.api.web.RubyRailsWidget;
+import org.sonar.api.web.UserRole;
+import org.sonar.api.web.WidgetCategory;
+
 /**
+ * Alerts
+ * 
  * @version 1.0
  * @author Patroklos PAPAPETROU
  */
-import org.sonar.api.web.*;
-
 @UserRole(UserRole.USER)
-@WidgetCategory({"Alerts"})
+@WidgetCategory({ "Alerts" })
 @Description("Shows Alerts in a fine way.")
-
 public class AlertsWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
-  public String getId() {
+  /**
+   * Get Widget Id
+   */
+  public final String getId() {
     return "alt_alerts";
   }
 
-  public String getTitle() {
+  /**
+   * Get widget title
+   */
+  public final String getTitle() {
     return "Alerts (advanced version)";
   }
 
+  /**
+   * Get widget template path
+   */
   @Override
-  protected String getTemplatePath() {
+  protected final String getTemplatePath() {
     return "/alt_alerts_widget.html.erb";
   }
-
 }

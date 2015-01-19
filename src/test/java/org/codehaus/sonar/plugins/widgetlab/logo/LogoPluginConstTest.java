@@ -17,20 +17,23 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.codehaus.sonar.plugins.widgetlab;
+package org.codehaus.sonar.plugins.widgetlab.logo;
 
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertNotNull;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 import org.junit.Test;
 
-public class ManualSeverityWidgetTest {
+public class LogoPluginConstTest {
 
   @Test
-  public void testWidgetDefinition() {
-    ManualSeverityWidget widget = new ManualSeverityWidget();
-    assertThat(widget.getId(), notNullValue());
-    assertThat(widget.getTitle(), notNullValue());
-    assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());
+  public void testInstance() throws SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException,
+    IllegalAccessException, InvocationTargetException {
+    Constructor<LogoPluginConst> constructor = LogoPluginConst.class.getDeclaredConstructor();
+    constructor.setAccessible(true);
+
+    assertNotNull("Testing constructor", constructor.newInstance());
   }
 }

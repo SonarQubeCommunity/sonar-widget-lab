@@ -17,20 +17,26 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.codehaus.sonar.plugins.widgetlab;
+package org.codehaus.sonar.plugins.widgetlab.logo;
 
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
 
 import org.junit.Test;
 
-public class ManualSeverityWidgetTest {
+/**
+ * Metrics unit test. Just check that there are two metrics
+ * 
+ * @author jbadenas
+ */
+public class LogoMetricsTest {
+
+  private final LogoMetrics metrics = new LogoMetrics();
 
   @Test
-  public void testWidgetDefinition() {
-    ManualSeverityWidget widget = new ManualSeverityWidget();
-    assertThat(widget.getId(), notNullValue());
-    assertThat(widget.getTitle(), notNullValue());
-    assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());
+  public void testGetMetrics() {
+    assertEquals("Metrics list must contain all metrics created", metrics.getMetrics(),
+        Arrays.asList(LogoMetrics.LOGO_DATA, LogoMetrics.LOGO_EXT));
   }
 }

@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.codehaus.sonar.plugins.widgetlab;
+package org.codehaus.sonar.plugins.widgetlab.logo;
 
 import org.sonar.api.web.AbstractRubyTemplate;
 import org.sonar.api.web.Description;
@@ -26,27 +26,29 @@ import org.sonar.api.web.UserRole;
 import org.sonar.api.web.WidgetCategory;
 
 /**
- * Manual Severity
+ * Logo Widget
  * 
- * @author gcampb2
+ * @author jbadenas
  */
 @UserRole(UserRole.USER)
-@Description("Shows reviews with a manual severity")
-@WidgetCategory({ "Reviews" })
-public class ManualSeverityWidget extends AbstractRubyTemplate implements RubyRailsWidget {
+@Description("Shows a simple logo")
+@WidgetCategory("Logo")
+public class LogoDashboardWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
   /**
    * Get Widget Id
    */
+  @Override
   public final String getId() {
-    return "manual_severity_reviews";
+    return "logo";
   }
 
   /**
    * Get widget title
    */
+  @Override
   public final String getTitle() {
-    return "Manual Severity Reviews";
+    return "Logo";
   }
 
   /**
@@ -54,6 +56,6 @@ public class ManualSeverityWidget extends AbstractRubyTemplate implements RubyRa
    */
   @Override
   protected final String getTemplatePath() {
-    return "/manual_severity_reviews_widget.html.erb";
+    return "/logo/logo_dashboard_widget.html.erb";
   }
 }

@@ -19,39 +19,47 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
-import org.sonar.api.web.*;
+import org.sonar.api.web.AbstractRubyTemplate;
+import org.sonar.api.web.Description;
+import org.sonar.api.web.RubyRailsWidget;
+import org.sonar.api.web.UserRole;
+import org.sonar.api.web.WidgetCategory;
+import org.sonar.api.web.WidgetProperties;
+import org.sonar.api.web.WidgetProperty;
+import org.sonar.api.web.WidgetPropertyType;
+import org.sonar.api.web.WidgetScope;
 
+/**
+ * Html text
+ */
 @UserRole(UserRole.USER)
 @Description("Displays the configured text. Intended to enable dashboard description.")
-@WidgetCategory({"Global"})
+@WidgetCategory({ "Global" })
 @WidgetScope("GLOBAL")
-@WidgetProperties({
-    @WidgetProperty(key = "userText",
-        description = "Text to display in widget",
-        type=WidgetPropertyType.TEXT
-    ),
-    @WidgetProperty(key = "widgetTitle",
-        description = "Widget title. Will be displayed in a blue bar across the top."
-    ),
-    @WidgetProperty(key = "isMarkdown",
-        description = "Check to have text rendered as markdown",
-        type=WidgetPropertyType.BOOLEAN
-    )
-})
-public class HtmlWidget  extends AbstractRubyTemplate implements RubyRailsWidget {
+@WidgetProperties({ @WidgetProperty(key = "userText", description = "Text to display in widget", type = WidgetPropertyType.TEXT),
+  @WidgetProperty(key = "widgetTitle", description = "Widget title. Will be displayed in a blue bar across the top."),
+  @WidgetProperty(key = "isMarkdown", description = "Check to have text rendered as markdown", type = WidgetPropertyType.BOOLEAN) })
+public class HtmlWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
-  public String getId() {
+  /**
+   * Get Widget Id
+   */
+  public final String getId() {
     return "user-text";
   }
 
-  public String getTitle() {
+  /**
+   * Get widget title
+   */
+  public final String getTitle() {
     return "User Text Display";
   }
 
+  /**
+   * Get widget template path
+   */
   @Override
-  protected String getTemplatePath() {
+  protected final String getTemplatePath() {
     return "/html_widget.html.erb";
-
   }
-
 }

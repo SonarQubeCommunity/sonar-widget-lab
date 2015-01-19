@@ -17,43 +17,43 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.codehaus.sonar.plugins.widgetlab;
-
-import org.sonar.api.web.AbstractRubyTemplate;
-import org.sonar.api.web.Description;
-import org.sonar.api.web.RubyRailsWidget;
-import org.sonar.api.web.UserRole;
-import org.sonar.api.web.WidgetCategory;
+package org.codehaus.sonar.plugins.widgetlab.logo;
 
 /**
- * Manual Severity
+ * Constant attributes
  * 
- * @author gcampb2
+ * @author jbadenas
  */
-@UserRole(UserRole.USER)
-@Description("Shows reviews with a manual severity")
-@WidgetCategory({ "Reviews" })
-public class ManualSeverityWidget extends AbstractRubyTemplate implements RubyRailsWidget {
+public final class LogoPluginConst {
 
   /**
-   * Get Widget Id
+   * Private constructor
    */
-  public final String getId() {
-    return "manual_severity_reviews";
+  private LogoPluginConst() {
   }
 
   /**
-   * Get widget title
+   * Location for the image, it can be an URL or a path to a file in the source code
    */
-  public final String getTitle() {
-    return "Manual Severity Reviews";
-  }
+  public static final String CONFKEY_IMG_LOCATION = "logo.imglocation";
 
   /**
-   * Get widget template path
+   * Set the image style with this property, ex: width:200px;
    */
-  @Override
-  protected final String getTemplatePath() {
-    return "/manual_severity_reviews_widget.html.erb";
-  }
+  public static final String CONFKEY_IMG_STYLE = "logo.style";
+
+  /**
+   * Set a link in the image to redirect to.
+   */
+  public static final String CONFKEY_LINK = "logo.link";
+
+  /**
+   * Alternative text for the image
+   */
+  public static final String CONFKEY_ALT_TEXT = "logo.alttext";
+
+  /**
+   * Internal prefix to specify a image in the sources directory
+   */
+  public static final String IMGPATH_PREFIX_SOURCES = "sources:";
 }

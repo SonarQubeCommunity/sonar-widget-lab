@@ -17,20 +17,31 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.codehaus.sonar.plugins.widgetlab;
+package org.codehaus.sonar.plugins.widgetlab.logo;
 
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import org.sonar.api.web.AbstractRubyTemplate;
+import org.sonar.api.web.RubyRailsWebservice;
 
-import org.junit.Test;
+/**
+ * Web Service at sonarhost/api/plugins/Logo/getLogo?project=[project]
+ * 
+ * @author jbadenas
+ */
+public class LogoWebService extends AbstractRubyTemplate implements RubyRailsWebservice {
 
-public class ManualSeverityWidgetTest {
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final String getTemplatePath() {
+    return "/logo/LogoController.rb";
+  }
 
-  @Test
-  public void testWidgetDefinition() {
-    ManualSeverityWidget widget = new ManualSeverityWidget();
-    assertThat(widget.getId(), notNullValue());
-    assertThat(widget.getTitle(), notNullValue());
-    assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final String getId() {
+    return "logo";
   }
 }

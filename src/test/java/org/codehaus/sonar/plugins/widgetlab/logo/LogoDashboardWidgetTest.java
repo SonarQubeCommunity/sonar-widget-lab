@@ -17,20 +17,33 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.codehaus.sonar.plugins.widgetlab;
+package org.codehaus.sonar.plugins.widgetlab.logo;
 
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class ManualSeverityWidgetTest {
+/**
+ * Tests that the resource for the widget exists
+ * 
+ * @author jbadenas
+ */
+public class LogoDashboardWidgetTest {
+
+  private LogoDashboardWidget widget = new LogoDashboardWidget();
 
   @Test
-  public void testWidgetDefinition() {
-    ManualSeverityWidget widget = new ManualSeverityWidget();
-    assertThat(widget.getId(), notNullValue());
-    assertThat(widget.getTitle(), notNullValue());
-    assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());
+  public void testWidgetId() {
+    assertEquals(widget.getId(), "logo");
+  }
+
+  @Test
+  public void testWidgetTitle() {
+    assertEquals(widget.getTitle(), "Logo");
+  }
+
+  @Test
+  public void testWidgetTemplatePath() {
+    assertEquals(widget.getTemplatePath(), "/logo/logo_dashboard_widget.html.erb");
   }
 }

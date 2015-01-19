@@ -20,7 +20,15 @@
 package org.codehaus.sonar.plugins.widgetlab;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+
+import java.util.Arrays;
+
+import org.codehaus.sonar.plugins.widgetlab.logo.LogoDashboardWidget;
+import org.codehaus.sonar.plugins.widgetlab.logo.LogoMetrics;
+import org.codehaus.sonar.plugins.widgetlab.logo.LogoPostJob;
+import org.codehaus.sonar.plugins.widgetlab.logo.LogoWebService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,6 +43,9 @@ public class WidgetLabPluginTest {
 
   @Test
   public void testPluginDefinition() {
-    assertThat(plugin.getExtensions().size(), equalTo(5));
+    assertThat(plugin.getExtensions().size(), equalTo(9));
+    assertEquals("Plugin extensions must contain all extensions created", plugin.getExtensions(), Arrays.asList(AlertsWidget.class,
+        AltRulesComplianceWidget.class, DifferentialDropdownWidget.class, HtmlWidget.class, ManualSeverityWidget.class,
+        LogoDashboardWidget.class, LogoMetrics.class, LogoPostJob.class, LogoWebService.class));
   }
 }

@@ -19,16 +19,16 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
-import org.junit.Test;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
+import org.junit.Test;
 
 /**
- *
  * @author gcampb2
  */
 public class HtmlWidgetTest {
+
   @Test
   public void testWidgetDefinition() {
     HtmlWidget widget = new HtmlWidget();
@@ -38,5 +38,4 @@ public class HtmlWidgetTest {
 
     assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());
   }
-
 }
