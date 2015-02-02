@@ -19,13 +19,14 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
+import org.codehaus.sonar.plugins.widgetlab.ManualSeverityWidget;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-public class ManualSeverityWidgetTest {
 
+public class ManualSeverityWidgetTest {
   @Test
   public void testWidgetDefinition() {
     ManualSeverityWidget widget = new ManualSeverityWidget();
@@ -33,4 +34,5 @@ public class ManualSeverityWidgetTest {
     assertThat(widget.getTitle(), notNullValue());
     assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());
   }
+
 }

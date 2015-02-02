@@ -19,41 +19,28 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
-import org.sonar.api.web.AbstractRubyTemplate;
-import org.sonar.api.web.Description;
-import org.sonar.api.web.RubyRailsWidget;
-import org.sonar.api.web.UserRole;
-import org.sonar.api.web.WidgetCategory;
-
 /**
- * Manual Severity
- * 
+ *
  * @author gcampb2
  */
+import org.sonar.api.web.*;
+
 @UserRole(UserRole.USER)
 @Description("Shows reviews with a manual severity")
-@WidgetCategory({ "Reviews" })
+@WidgetCategory({"Reviews"})
 public class ManualSeverityWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
-  /**
-   * Get Widget Id
-   */
-  public final String getId() {
+  public String getId() {
     return "manual_severity_reviews";
   }
 
-  /**
-   * Get widget title
-   */
-  public final String getTitle() {
+  public String getTitle() {
     return "Manual Severity Reviews";
   }
 
-  /**
-   * Get widget template path
-   */
   @Override
-  protected final String getTemplatePath() {
+  protected String getTemplatePath() {
     return "/manual_severity_reviews_widget.html.erb";
   }
+
 }

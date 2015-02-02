@@ -21,8 +21,8 @@ package org.codehaus.sonar.plugins.widgetlab;
 
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
-
 import org.junit.Test;
+
 
 public class DifferentialDropdownWidgetTest {
 
@@ -33,4 +33,5 @@ public class DifferentialDropdownWidgetTest {
     assertThat(widget.getTitle(), notNullValue());
     assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());
   }
+
 }

@@ -19,45 +19,37 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
-import org.sonar.api.web.AbstractRubyTemplate;
-import org.sonar.api.web.Description;
-import org.sonar.api.web.RubyRailsWidget;
-import org.sonar.api.web.UserRole;
-import org.sonar.api.web.WidgetCategory;
-import org.sonar.api.web.WidgetProperties;
-import org.sonar.api.web.WidgetProperty;
-import org.sonar.api.web.WidgetPropertyType;
+import org.sonar.api.web.*;
 
-/**
- * Alternative rules compliance
- */
 @UserRole(UserRole.USER)
 @Description("Shows weighted issues, in addition to Rules Compliance Index.")
-@WidgetCategory({ "Technical Debt" })
+@WidgetCategory({"Technical Debt"})
 @WidgetProperties({
-  @WidgetProperty(key = "showCompliance", description = "Show Rules Compliance", type = WidgetPropertyType.BOOLEAN, defaultValue = "true"),
-  @WidgetProperty(key = "showTechDebt", description = "Show Technical Debt", type = WidgetPropertyType.BOOLEAN, defaultValue = "true") })
+    @WidgetProperty(key = "showCompliance",
+        description = "Show Rules Compliance",
+        type=WidgetPropertyType.BOOLEAN,
+        defaultValue = "true"
+    ),
+    @WidgetProperty(key = "showTechDebt",
+        description = "Show Technical Debt",
+        type=WidgetPropertyType.BOOLEAN,
+        defaultValue = "true"
+    )
+})
+
 public class AltRulesComplianceWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
-  /**
-   * Get Widget Id
-   */
-  public final String getId() {
+  public String getId() {
     return "rules-alt";
   }
 
-  /**
-   * Get widget title
-   */
-  public final String getTitle() {
+  public String getTitle() {
     return "Alt Rules Compliance";
   }
 
-  /**
-   * Get widget template path
-   */
   @Override
-  protected final String getTemplatePath() {
+  protected String getTemplatePath() {
     return "/alt_rules_compliance_widget.html.erb";
   }
+
 }

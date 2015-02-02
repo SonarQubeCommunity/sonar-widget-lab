@@ -24,8 +24,8 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-public class AlertsWidgetTest {
 
+public class AlertsWidgetTest {
   @Test
   public void testWidgetDefinition() {
     AlertsWidget widget = new AlertsWidget();
