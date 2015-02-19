@@ -19,22 +19,28 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
-import org.junit.Before;
-import org.junit.Test;
+import org.sonar.api.web.*;
 
-public class WidgetLabPluginTest {
 
-  private WidgetLabPlugin plugin;
+@UserRole(UserRole.USER)
+@Description("Issues tags for security-related issues")
+@WidgetCategory({"Technical Debt"})
+public class SecurityIssuesTagWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
-  @Before
-  public void setUp() {
-    plugin = new WidgetLabPlugin();
+
+  @Override
+  protected String getTemplatePath() {
+
+    return "/security_issues_tag_widget.html.erb";
   }
 
-  @Test
-  public void testPluginDefinition() {
-    assertThat(plugin.getExtensions().size(), equalTo(6));
+  @Override
+  public String getId() {
+    return "security_issues_tag";
+  }
+
+  @Override
+  public String getTitle() {
+    return "Security Issues Tags";
   }
 }
