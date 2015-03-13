@@ -69,7 +69,9 @@
                     obj.value+"</a></td>");
             }
           });
-          if (securityTags.length > 0) {
+          if (securityTags.length == 0) {
+            tableContent = "<tr><td>No security-related issue tags found.</td></tr>";
+          } else {
             var tableContent = "";
 
             jQuery.each(securityTags, function(i, obj) {
@@ -85,9 +87,8 @@
                 tableContent += "<td>&nbsp;</td>\n";
               }
             });
-
-            jQuery("#<%= containerId %>-table").html(tableContent);
           }
+          jQuery("#<%= containerId %>-table").html(tableContent);
         }
       });
   })();

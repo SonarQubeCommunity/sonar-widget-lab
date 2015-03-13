@@ -41,6 +41,6 @@ public class SecurityIssuesTagWidget extends AbstractRubyTemplate implements Rub
 
   @Override
   public String getTitle() {
-    return "Security Issues Tags";
+    return "Project Security Issues Tags";
   }
 }
