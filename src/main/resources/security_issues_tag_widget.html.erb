@@ -69,10 +69,12 @@
                     obj.value+"</a></td>");
             }
           });
+
+          var tableContent = "";
+
           if (securityTags.length == 0) {
             tableContent = "<tr><td>No security-related issue tags found.</td></tr>";
           } else {
-            var tableContent = "";
 
             jQuery.each(securityTags, function(i, obj) {
               if (i % 3 == 0) {
@@ -93,13 +95,18 @@
       });
   })();
 </script>
-<!--<![endif]-->
-<% end %>
-
 
 <!--[if (gte IE 9)|!(IE)]><!-->
   <table class="spacedicon" style="width: 100%;"  id="<%= containerId %>-table">
 
-
   </table>
+
+<% else %>
+
+  <!--[if (gte IE 9)|!(IE)]><!-->
+    <table class="spacedicon" style="width: 100%;"  id="<%= containerId %>-table">
+      <tr><td>No security-related issue tags found.</td></tr>
+    </table>
+
 <!--<![endif]-->
+<% end %>
