@@ -19,22 +19,17 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
-import org.junit.Before;
 import org.junit.Test;
 
-public class WidgetLabPluginTest {
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
-  private WidgetLabPlugin plugin;
-
-  @Before
-  public void setUp() {
-    plugin = new WidgetLabPlugin();
-  }
-
+public class SecurityIssuesTagGlobalWidgetTest {
   @Test
-  public void testPluginDefinition() {
-    assertThat(plugin.getExtensions().size(), equalTo(5));
+  public void testWidgetDefinition() {
+    SecurityIssuesTagGlobalWidget widget = new SecurityIssuesTagGlobalWidget();
+    assertThat(widget.getId(), notNullValue());
+    assertThat(widget.getTitle(), notNullValue());
+    assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());
   }
 }

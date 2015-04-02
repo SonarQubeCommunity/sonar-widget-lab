@@ -32,7 +32,8 @@ public class WidgetLabPlugin extends SonarPlugin {
 
   public List getExtensions() {
     return Arrays.asList(AltRulesComplianceWidget.class,HtmlWidget.class,
-      DifferentialDropdownWidget.class, SecurityIssuesTagWidget.class);
+      DifferentialDropdownWidget.class, SecurityIssuesTagWidget.class,
+            SecurityIssuesTagGlobalWidget.class);
   }
 
 }

@@ -1,0 +1,83 @@
+<%
+  containerId = 'security_issues_global_tag' + widget.id.to_s
+  maxItems = 500
+  title = message('widget.security_issues_tag_global.title')
+%>
+
+<div class="histogram-widget" id="<%= containerId %>">
+  <!--[if lte IE 8 ]> <h3><%= message('widget.unsupported_browser_warning') -%></h3> <![endif]-->
+
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <h3 style="margin-bottom: 5px;"><%= title -%></h3>
+  <!--<![endif]-->
+
+</div>
+
+<script>
+  (function () {
+
+    var tagsOfInterest = ["owasp-top10", "sans-top25",
+                  "owasp-a1", "owasp-a2", "owasp-a3", "owasp-a4", "owasp-a5",
+                  "owasp-a6", "owasp-a7", "owasp-a8", "owasp-a9", "owasp-a10",
+                  "sans-top25-insecure", "sans-top25-porous", "sans-top25-risky",
+                  "error-handling", "multi-threading","injection", "denial-of-service"];
+
+    var queryParams = [
+          'ps=1',
+          'facets=tags',
+          'resolved=false',
+          'tags=' + tagsOfInterest.join([separator = ','])
+        ];
+    var query = queryParams.join('&');
+    var url = baseUrl + '/api/issues/search?' + query;
+
+    jQuery.ajax({
+      type: "GET",
+      url: url,
+      dataType:"json",
+      success: function(data, textStatus, jqXHR) {
+        var securityTags = [];
+
+        jQuery.each(data.facets[0].values, function(i, obj) {
+
+          if(jQuery.inArray(obj.val, tagsOfInterest) > -1 && obj.count > 0) {
+
+            securityTags.push("<td class='thin nowrap'>" + obj.val + "</td>" +
+                "<td class='thin right nowrap'>"+
+                "<a href='<%= "#{url_for(:controller => 'issues', :action => 'index')}?}" -%>#resolved=false|tags=" +
+                  obj.val + "' class='widget-link'>"+
+                  obj.count+"</a></td>");
+          }
+        });
+
+        var tableContent = "";
+
+        if (securityTags.length == 0) {
+          tableContent = "<tr><td>No security-related issue tags found.</td></tr>";
+        } else {
+
+          jQuery.each(securityTags, function(i, obj) {
+            if (i % 3 == 0) {
+              tableContent += "<tr>\n";
+            }
+
+            tableContent += securityTags[i];
+
+            if (i % 3 == 2 || i == securityTags.length -1) {
+              tableContent += "</tr>\n";
+            } else {
+              tableContent += "<td>&nbsp;</td>\n";
+            }
+          });
+        }
+        jQuery("#<%= containerId %>-table").html(tableContent);
+      }
+    });
+  })();
+</script>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<table class="spacedicon" style="width: 100%;"  id="<%= containerId %>-table">
+
+</table>
+<!--<![endif]-->
