@@ -1,6 +1,7 @@
 <%
   containerId = 'security_issues_tag' + widget.id.to_s
   maxItems = 500
+  title = message('widget.security_issues_tag.title')
 
   if has_role?(:user, @project) && !Internal.issues.listTagsForComponent(@project.uuid, maxItems).isEmpty()
     search_options = {
@@ -13,7 +14,6 @@
       search_options['createdAfter'] = @snapshot.period_datetime(@dashboard_configuration.period_index).strftime('%FT%T%z')
     end
 
-    title = message('widget.security_issues_tag.title')
 
 %>
 
