@@ -39,7 +39,6 @@ public class DifferentialDropdownWidget  extends AbstractRubyTemplate implements
   @Override
   protected String getTemplatePath() {
     return "/differential_dropdown_widget.html.erb";
-//    return "C:/workspaces/sonarPlugins/widget-lab/src/main/resources/differential_dropdown_widget.html.erb";
   }
 
 
