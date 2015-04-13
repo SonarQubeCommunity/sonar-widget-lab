@@ -1,0 +1,188 @@
+<style>
+path {
+  stroke: steelblue;
+  stroke-width: 2;
+  fill: none;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+</style>
+
+<%
+  containerId = 'measure_bar_chart' + widget.id.to_s
+
+  if has_role?(:user, @project)
+    metric = widget_properties["metric"]
+    measure = measure(metric)
+
+    if metric 
+%>
+
+<span class="widget-label"><%= measure.metric.short_name -%></span>
+
+<div class="histogram-widget" id="<%= containerId %>">
+  <!--[if lte IE 8 ]> <h3><%= message('widget.unsupported_browser_warning') -%></h3> <![endif]-->
+</div>
+
+<span class="">Last: Week - Month - Quarter - Semester - Year</span>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script>
+  var data<%= widget.id.to_s %> = [];
+
+  var $ = jQuery;
+
+  var metric = '<%= measure.metric.key -%>';
+
+  function trans(left, top) {
+    return 'translate(' + left + ', ' + top + ')';
+  }
+
+  function doMyGraph(period) {
+
+    var startDate = new Date();
+
+    if ( period == 'Y' ) {
+      startDate.setDate(startDate.getDate() - 365);
+    } else if ( period == 'S' ) {
+      startDate.setDate(startDate.getDate() - 180);
+    } else if ( period == 'Q' ) {
+      startDate.setDate(startDate.getDate() - 90);
+    } else if ( period == 'M' ) {
+      startDate.setDate(startDate.getDate() - 30);
+    } else if ( period == 'W' ) {
+      startDate.setDate(startDate.getDate() - 7);
+    } else {
+      // default
+      startDate.setDate(startDate.getDate() - 365);
+    }
+    
+    var queryParams = [
+          'resource=<%= @project.id() -%>',
+          'metrics=' + metric,
+          'fromDateTime=' + startDate.toISOString()
+        ];
+    var query = queryParams.join('&');
+    var url = baseUrl + '/api/timemachine/index?' + query
+
+    $.get(url, function(r) {
+      r[0].cells.forEach(function (cell) {
+        var p = {date: new Date(cell.d), value: cell.v[0]};
+        console.log(cell.v[0]);
+        console.log(new Date(cell.d));
+        data<%= widget.id.to_s %>.push(p);
+      });
+
+      var filteredData<%= widget.id.to_s %> = [];
+
+      var previousP = null;
+      for (i = 0; i < data<%= widget.id.to_s %>.length; i++) { 
+        var currentP = data<%= widget.id.to_s %>[i];
+        console.log("currentP Year: " + currentP.date.getYear());
+
+        if (previousP != null) {
+          console.log("previousP Year: " + previousP.date.getYear());
+          if (currentP.date.getMonth() > previousP.date.getMonth() || currentP.date.getYear() > previousP.date.getYear()) {
+            filteredData<%= widget.id.to_s %>.push(previousP);
+            previousP = currentP;
+          }
+        } else {
+          previousP = currentP;
+        }
+        
+        if ( i == (data<%= widget.id.to_s %>.length - 1)) {
+          filteredData<%= widget.id.to_s %>.push(currentP);
+        }
+      }
+      data<%= widget.id.to_s %> = filteredData<%= widget.id.to_s %>;
+
+var margin = {top: 20, right: 20, bottom: 70, left: 80},
+    width = d3.select("#<%= containerId %>").property('offsetWidth') - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+
+var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+var y = d3.scale.linear().range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .tickFormat(d3.time.format("%Y-%m"));
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10);
+
+
+var svg = d3.select("#<%= containerId %>").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", 
+          "translate(" + margin.left + "," + margin.top + ")");
+
+  
+  x.domain(data<%= widget.id.to_s %>.map(function(d) { return d.date; }));
+  y.domain([0, d3.max(data<%= widget.id.to_s %>, function(d) { return d.value; })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-.8em")
+      .attr("dy", "-.55em")
+      .attr("transform", "rotate(-90)" );
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+      .append("text")
+      .attr("transform", "rotate(0)")
+      .attr("y", -18)
+      .attr("x", 8)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("<%= measure.metric.value_type_name + measure.metric.suffix -%>");
+
+  var barEnter = svg.selectAll("bar")
+      .data(data<%= widget.id.to_s %>)
+      .enter();
+
+  barEnter.append("rect")
+      .style("fill", "steelblue")
+      .attr("x", function(d) { return x(d.date); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); });
+
+    barEnter.append("text")
+      .attr('transform', function(d) { return trans(x(d.date) + x.rangeBand() / 2, y(d.value) - 3) ; })
+      .style('text-anchor', 'middle')
+      .text(function(d) { return d.value; });
+
+    });
+  };
+
+  doMyGraph('S');
+
+
+
+</script>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+  <table class="spacedicon" style="width: 100%;"  id="<%= containerId %>-table">
+
+  </table>
+
+  <% else %>
+  Please configure the widget to have the Measure Bar Chart working.
+  <% end %>
+<!--<![endif]-->
+<% end %>

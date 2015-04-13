@@ -21,6 +21,7 @@ package org.codehaus.sonar.plugins.widgetlab;
 
 import java.util.Arrays;
 import java.util.List;
+
 import org.sonar.api.SonarPlugin;
 
 /**
@@ -31,9 +32,9 @@ import org.sonar.api.SonarPlugin;
 public class WidgetLabPlugin extends SonarPlugin {
 
   public List getExtensions() {
-    return Arrays.asList(AltRulesComplianceWidget.class,HtmlWidget.class,
+    return Arrays.asList(AltRulesComplianceWidget.class, HtmlWidget.class,
       DifferentialDropdownWidget.class, SecurityIssuesTagWidget.class,
-            SecurityIssuesTagGlobalWidget.class);
+      SecurityIssuesTagGlobalWidget.class, MeasureBarChartWidget.class, MeasureLineChartWidget.class);
   }
 
 }
