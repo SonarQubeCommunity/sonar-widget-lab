@@ -18,6 +18,7 @@ path {
 
   if has_role?(:user, @project)
     metric = widget_properties["metric"]
+    period = widget_properties["period"]
     measure = measure(metric)
 
     if metric 
@@ -29,21 +30,50 @@ path {
   <!--[if lte IE 8 ]> <h3><%= message('widget.unsupported_browser_warning') -%></h3> <![endif]-->
 </div>
 
-<span class="">Last: Week - Month - Quarter - Semester - Year</span>
+<span class="">Last: 
+  <a href="#" id="pW<%= widget.id.to_s %>" >Week</a> - 
+  <a href="#" id="pM<%= widget.id.to_s %>" >Month</a> - 
+  <a href="#" id="pQ<%= widget.id.to_s %>" >Quarter</a> - 
+  <a href="#" id="pS<%= widget.id.to_s %>" >Semester</a> - 
+  <a href="#" id="pY<%= widget.id.to_s %>" >Year</a></span>
 
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script>
-  var data<%= widget.id.to_s %> = [];
+
+  Date.prototype.getWeek = function() {
+    var onejan = new Date(this.getFullYear(),0,1);
+    return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+  }
+
+  var today = new Date();
+  var weekno = today.getWeek();
+  console.log(weekno);
 
   var $ = jQuery;
 
-  var metric = '<%= measure.metric.key -%>';
+  $( "#pW<%= widget.id.to_s %>" ).click(function() {
+    doMyGraph<%= widget.id.to_s %>('W', '<%= measure.metric.key %>');
+  });
+  $( "#pM<%= widget.id.to_s %>" ).click(function() {
+    doMyGraph<%= widget.id.to_s %>('M', '<%= measure.metric.key %>');
+  });
+  $( "#pQ<%= widget.id.to_s %>" ).click(function() {
+    doMyGraph<%= widget.id.to_s %>('Q', '<%= measure.metric.key %>');
+  });
+  $( "#pS<%= widget.id.to_s %>" ).click(function() {
+    doMyGraph<%= widget.id.to_s %>('S', '<%= measure.metric.key %>');
+  });
+  $( "#pY<%= widget.id.to_s %>" ).click(function() {
+    doMyGraph<%= widget.id.to_s %>('Y', '<%= measure.metric.key %>');
+  });
 
   function trans(left, top) {
     return 'translate(' + left + ', ' + top + ')';
   }
 
-  function doMyGraph(period) {
+  function doMyGraph<%= widget.id.to_s %>(period, metric) {
+
+    var data<%= widget.id.to_s %> = [];
 
     var startDate = new Date();
 
@@ -80,99 +110,118 @@ path {
 
       var filteredData<%= widget.id.to_s %> = [];
 
-      var previousP = null;
-      for (i = 0; i < data<%= widget.id.to_s %>.length; i++) { 
-        var currentP = data<%= widget.id.to_s %>[i];
-        console.log("currentP Year: " + currentP.date.getYear());
+      if ( period == 'Y' || period == 'S' || period == 'Q' ) {
+        var previousP = null;
+        for (i = 0; i < data<%= widget.id.to_s %>.length; i++) { 
+          var currentP = data<%= widget.id.to_s %>[i];
+          //console.log("currentP Year: " + currentP.date.getYear());
 
-        if (previousP != null) {
-          console.log("previousP Year: " + previousP.date.getYear());
-          if (currentP.date.getMonth() > previousP.date.getMonth() || currentP.date.getYear() > previousP.date.getYear()) {
-            filteredData<%= widget.id.to_s %>.push(previousP);
+          if (previousP != null) {
+            //console.log("previousP Year: " + previousP.date.getYear());
+            if (currentP.date.getMonth() > previousP.date.getMonth() || currentP.date.getYear() > previousP.date.getYear()) {
+              filteredData<%= widget.id.to_s %>.push(previousP);
+              previousP = currentP;
+            }
+          } else {
             previousP = currentP;
           }
-        } else {
-          previousP = currentP;
+          
+          if ( i == (data<%= widget.id.to_s %>.length - 1)) {
+            filteredData<%= widget.id.to_s %>.push(currentP);
+          }
         }
-        
-        if ( i == (data<%= widget.id.to_s %>.length - 1)) {
-          filteredData<%= widget.id.to_s %>.push(currentP);
+      } else {
+        var previousP = null;
+        for (i = 0; i < data<%= widget.id.to_s %>.length; i++) { 
+          var currentP = data<%= widget.id.to_s %>[i];
+
+          if (previousP != null) {
+            if (currentP.date.getWeek() > previousP.date.getWeek() || currentP.date.getYear() > previousP.date.getYear()) {
+              filteredData<%= widget.id.to_s %>.push(previousP);
+              previousP = currentP;
+            }
+          } else {
+            previousP = currentP;
+          }
+          
+          if ( i == (data<%= widget.id.to_s %>.length - 1)) {
+            filteredData<%= widget.id.to_s %>.push(currentP);
+          }
         }
       }
       data<%= widget.id.to_s %> = filteredData<%= widget.id.to_s %>;
 
-var margin = {top: 20, right: 20, bottom: 70, left: 80},
-    width = d3.select("#<%= containerId %>").property('offsetWidth') - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
+      var margin = {top: 20, right: 20, bottom: 70, left: 80},
+          width = d3.select("#<%= containerId %>").property('offsetWidth') - margin.left - margin.right,
+          height = 300 - margin.top - margin.bottom;
 
-var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
-var y = d3.scale.linear().range([height, 0]);
+      var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+      var y = d3.scale.linear().range([height, 0]);
 
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom")
-    .tickFormat(d3.time.format("%Y-%m"));
+      var xAxis = d3.svg.axis()
+          .scale(x)
+          .orient("bottom")
+          .tickFormat(d3.time.format("%Y-%m"));
 
-var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left")
-    .ticks(10);
+      var yAxis = d3.svg.axis()
+          .scale(y)
+          .orient("left")
+          .ticks(10);
 
 
-var svg = d3.select("#<%= containerId %>").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", 
-          "translate(" + margin.left + "," + margin.top + ")");
+      d3.select("#<%= containerId %>").html("");
+
+      var svg = d3.select("#<%= containerId %>").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   
-  x.domain(data<%= widget.id.to_s %>.map(function(d) { return d.date; }));
-  y.domain([0, d3.max(data<%= widget.id.to_s %>, function(d) { return d.value; })]);
+      x.domain(data<%= widget.id.to_s %>.map(function(d) { return d.date; }));
+      y.domain([0, d3.max(data<%= widget.id.to_s %>, function(d) { return d.value; })]);
 
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis)
-      .selectAll("text")
-      .style("text-anchor", "end")
-      .attr("dx", "-.8em")
-      .attr("dy", "-.55em")
-      .attr("transform", "rotate(-90)" );
+      svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", "-.55em")
+        .attr("transform", "rotate(-90)" );
 
-  svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis)
-      .append("text")
-      .attr("transform", "rotate(0)")
-      .attr("y", -18)
-      .attr("x", 8)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("<%= measure.metric.value_type_name + measure.metric.suffix -%>");
+      svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(0)")
+        .attr("y", -18)
+        .attr("x", 8)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("<%= measure.metric.value_type_name + measure.metric.suffix -%>");
 
-  var barEnter = svg.selectAll("bar")
-      .data(data<%= widget.id.to_s %>)
-      .enter();
+      var barEnter = svg.selectAll("bar")
+        .data(data<%= widget.id.to_s %>)
+        .enter();
 
-  barEnter.append("rect")
-      .style("fill", "steelblue")
-      .attr("x", function(d) { return x(d.date); })
-      .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.value); })
-      .attr("height", function(d) { return height - y(d.value); });
+      barEnter.append("rect")
+        .style("fill", "steelblue")
+        .attr("x", function(d) { return x(d.date); })
+        .attr("width", x.rangeBand())
+        .attr("y", function(d) { return y(d.value); })
+        .attr("height", function(d) { return height - y(d.value); });
 
-    barEnter.append("text")
-      .attr('transform', function(d) { return trans(x(d.date) + x.rangeBand() / 2, y(d.value) - 3) ; })
-      .style('text-anchor', 'middle')
-      .text(function(d) { return d.value; });
+      barEnter.append("text")
+        .attr('transform', function(d) { return trans(x(d.date) + x.rangeBand() / 2, y(d.value) - 3) ; })
+        .style('text-anchor', 'middle')
+        .text(function(d) { return d.value; });
 
     });
   };
 
-  doMyGraph('S');
-
-
+  doMyGraph<%= widget.id.to_s %>('<%= period %>', '<%= measure.metric.key %>');
 
 </script>
 

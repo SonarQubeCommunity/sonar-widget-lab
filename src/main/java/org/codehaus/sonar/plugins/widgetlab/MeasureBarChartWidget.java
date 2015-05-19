@@ -28,55 +28,34 @@ import org.sonar.api.web.WidgetProperties;
 import org.sonar.api.web.WidgetProperty;
 import org.sonar.api.web.WidgetPropertyType;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 @UserRole(UserRole.USER)
-@Description("Display a measure history in a bar chart (1 year of data)")
+@Description("Display a measure history in a bar chart")
 @WidgetCategory({"Measures"})
 @WidgetProperties({
-  @WidgetProperty(key = "metric",
+  @WidgetProperty(key = MeasureBarChartWidget.MEASURE_PROPERTY,
     description = "Measure",
+    defaultValue = "sqale_index",
     type = WidgetPropertyType.METRIC),
-  @WidgetProperty(key = "period",
+  @WidgetProperty(key = MeasureBarChartWidget.PERIOD_PROPERTY,
     description = "Period",
-    type = WidgetPropertyType.SINGLE_SELECT_LIST)
+    type = WidgetPropertyType.SINGLE_SELECT_LIST,
+    defaultValue = "Y",
+    options = {"Y", "S", "Q", "M", "W"}),
 })
 public class MeasureBarChartWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
+  public static final String MEASURE_PROPERTY = "metric";
+  public static final String PERIOD_PROPERTY = "period";
+
   @Override
   protected String getTemplatePath() {
-    // return "/measure_bar_chart_widget.html.erb";
-    return "/Users/alexandregigleux/Repos/sonar-widget-lab/src/main/resources/measure_bar_chart_widget.html.erb";
+    return "/measure_bar_chart_widget.html.erb";
+    //return "/Users/alexandregigleux/Repos/sonar-widget-lab/src/main/resources/measure_bar_chart_widget.html.erb";
   }
 
   @Override
   public String getId() {
     return "measure_bar_chart";
-  }
-
-  public String intToEnglishValue(int i) {
-    if (i == 1) {
-      return "One";
-    }
-    if (i == 2) {
-      return "Two";
-    }
-    if (i == 3) {
-      return "Three";
-    }
-    if (i == 4) {
-      return "Four";
-    }
-    if (i == 5) {
-      return "Five";
-    }
-    if (i == 6) {
-      return "Six";
-    }
-    if (i > 6) {
-      throw new NotImplementedException();
-    }
-    return null;
   }
 
   @Override
