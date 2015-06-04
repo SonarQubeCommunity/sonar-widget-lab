@@ -50,7 +50,6 @@ public class MeasureBarChartWidget extends AbstractRubyTemplate implements RubyR
   @Override
   protected String getTemplatePath() {
     return "/measure_bar_chart_widget.html.erb";
-    //return "/Users/alexandregigleux/Repos/sonar-widget-lab/src/main/resources/measure_bar_chart_widget.html.erb";
   }
 
   @Override
