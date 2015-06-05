@@ -10,7 +10,7 @@ function trans(left, top) {
   return 'translate(' + left + ', ' + top + ')';
 };
 
-function barChart(period, metric, projectId, containerId) {
+function barChart(period, metric, projectId, containerId, legendText) {
 
   var data = [];
   var startDate = new Date();

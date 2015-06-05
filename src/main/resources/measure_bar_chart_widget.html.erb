@@ -13,7 +13,7 @@ path {
 }
 </style>
 
-<script src="<%= ApplicationController.root_context + '/static/widgetlab/bar_chart.js' -%>"></script>
+<script src="<%= ApplicationController.root_context -%>/static/widgetlab/bar_chart.js?v=<%= sonar_version -%>"></script>
 
 <%
   containerId = 'measure_bar_chart' + widget.id.to_s
@@ -43,30 +43,41 @@ path {
 
   var $ = jQuery; 
 
-  var legendText = "<%= measure.metric.value_type_name + measure.metric.suffix -%>";
+  <% 
+    legendText = ''
+    if measure.metric.value_type == 'WORK_DUR' 
+      legendText = 'Minutes'
+    else
+      legendText = measure.metric.suffix 
+    end
+  %>
+
+  console.log("<%= measure.metric.value_type == 'WORK_DUR'  %>");
+
+  var legendText = "<%= legendText -%>";
 
   $( "#pW<%= widget.id.to_s %>" ).click(function() {
-    barChart('W', '<%= measure.metric.key %>', '<%= @project.id() -%>', '<%= containerId %>', legendText);
+    barChart('W', '<%= measure.metric.key -%>', '<%= @project.id() -%>', '<%= containerId -%>', legendText);
   });
   $( "#pM<%= widget.id.to_s %>" ).click(function() {
-    barChart('M', '<%= measure.metric.key %>', '<%= @project.id() -%>', '<%= containerId %>', legendText);
+    barChart('M', '<%= measure.metric.key -%>', '<%= @project.id() -%>', '<%= containerId -%>', legendText);
   });
   $( "#pQ<%= widget.id.to_s %>" ).click(function() {
-    barChart('Q', '<%= measure.metric.key %>', '<%= @project.id() -%>', '<%= containerId %>', legendText);
+    barChart('Q', '<%= measure.metric.key -%>', '<%= @project.id() -%>', '<%= containerId -%>', legendText);
   });
   $( "#pS<%= widget.id.to_s %>" ).click(function() {
-    barChart('S', '<%= measure.metric.key %>', '<%= @project.id() -%>', '<%= containerId %>', legendText);
+    barChart('S', '<%= measure.metric.key -%>', '<%= @project.id() -%>', '<%= containerId -%>', legendText);
   });
   $( "#pY<%= widget.id.to_s %>" ).click(function() {
     barChart('Y', '<%= measure.metric.key %>', '<%= @project.id() -%>', '<%= containerId %>', legendText);
   });
 
-  barChart('<%= period %>', '<%= measure.metric.key %>', '<%= @project.id() -%>', '<%= containerId %>', legendText);
+  barChart('<%= period %>', '<%= measure.metric.key -%>', '<%= @project.id() -%>', '<%= containerId -%>', legendText);
 
 </script>
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-  <table class="spacedicon" style="width: 100%;"  id="<%= containerId %>-table">
+  <table class="spacedicon" style="width: 100%;"  id="<%= containerId -%>-table">
 
   </table>
 
