@@ -31,7 +31,7 @@ import org.sonar.api.web.*;
         type=WidgetPropertyType.TEXT
     ),
     @WidgetProperty(key = "widgetTitle",
-        description = "Widget title. Will be displayed in a blue bar across the top."
+        description = "Widget title. Will be displayed in a bar across the top."
     ),
     @WidgetProperty(key = "isMarkdown",
         description = "Check to have text rendered as markdown",
