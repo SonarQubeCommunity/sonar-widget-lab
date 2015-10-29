@@ -61,12 +61,13 @@
           jQuery.each(data.tags, function(i, obj) {
 
             if(jQuery.inArray(obj.key, tagsOfInterest) > -1) {
+              var formattedValue = new Number(obj.value);
 
               securityTags.push("<td class='thin nowrap'>" + obj.key + "</td>" +
                   "<td class='thin right nowrap'>"+
                   "<a href='<%= "#{url_for(:controller => 'component_issues', :action => 'index')}?id=#{url_encode(@project.key)}" -%>#resolved=false|tags=" +
                     obj.key + "' class='widget-link'>"+
-                    obj.value+"</a></td>");
+                    formattedValue.toLocaleString()+"</a></td>");
             }
           });
 

@@ -41,12 +41,13 @@
         jQuery.each(data.facets[0].values, function(i, obj) {
 
           if(jQuery.inArray(obj.val, tagsOfInterest) > -1 && obj.count > 0) {
+            var formattedValue = new Number(obj.count);
 
             securityTags.push("<td class='thin nowrap'>" + obj.val + "</td>" +
                 "<td class='thin right nowrap'>"+
                 "<a href='<%= "#{url_for(:controller => 'issues', :action => 'index')}?}" -%>#resolved=false|tags=" +
                   obj.val + "' class='widget-link'>"+
-                  obj.count+"</a></td>");
+                  formattedValue.toLocaleString()+"</a></td>");
           }
         });
 
