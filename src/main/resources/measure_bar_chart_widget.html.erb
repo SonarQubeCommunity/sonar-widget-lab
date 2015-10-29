@@ -48,25 +48,22 @@ path {
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script>
   var $ = jQuery;
+  var lastPeriod<%= widget.id.to_s %>;
 
   function drawChart<%= widget.id.to_s %>(target) {
 
     barChart(target, '<%= measure.metric.key -%>', '<%= @project.id() -%>', '<%= containerId -%>', "<%= legendText -%>");
 
-    var opts = ["W","M", "Q", "S", "Y"];
-    var weight = "normal";
-
-    for (var i in opts) {
-      if (opts[i] == target) {
-        weight="bold";
-      } else {
-        weight="normal";
-      }
-      $( "#p" + opts[i] + "<%= widget.id.to_s %>" ).css( "font-weight", weight );
-    }
+    $( "#p" + lastPeriod<%= widget.id.to_s %> + "<%= widget.id.to_s %>" ).css( "font-weight", "normal" );
+    $( "#p" + target + "<%= widget.id.to_s %>" ).css( "font-weight", "bold" );
+    lastPeriod<%= widget.id.to_s %> = target;
   }
 
   drawChart<%= widget.id.to_s %>("W");
+
+  autoResize(500, function() {
+    drawChart<%= widget.id.to_s %>(lastPeriod<%= widget.id.to_s %>);
+  });
 </script>
 
 <!--[if (gte IE 9)|!(IE)]><!-->
