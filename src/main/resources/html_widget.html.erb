@@ -6,7 +6,9 @@
 <div class="dashbox">
 
   <% if widget_properties['isMarkdown'] %>
-    <%= Api::Utils.markdown_to_html(widget_properties['userText']) -%>
+    <div class="markdown">
+      <%= Api::Utils.markdown_to_html(widget_properties['userText']) -%>
+    </div>
   <% else %>
     <%= widget_properties['userText'] -%>
   <% end %>

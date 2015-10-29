@@ -34,7 +34,7 @@ import org.sonar.api.web.*;
         description = "Widget title. Will be displayed in a bar across the top."
     ),
     @WidgetProperty(key = "isMarkdown",
-        description = "Check to have text rendered as markdown",
+        description = "Check to have text rendered as markdown. (<a href='#' onclick=\"window.open(baseUrl + '/markdown/help','markdown','height=300,width=600,scrollbars=1,resizable=1');return false;\">Markdown help</a>)",
         type=WidgetPropertyType.BOOLEAN
     )
 })
