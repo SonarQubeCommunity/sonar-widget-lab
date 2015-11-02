@@ -59,7 +59,7 @@ path {
     lastPeriod<%= widget.id.to_s %> = target;
   }
 
-  drawChart<%= widget.id.to_s %>("W");
+  drawChart<%= widget.id.to_s %>("<%= period %>");
 
   autoResize(500, function() {
     drawChart<%= widget.id.to_s %>(lastPeriod<%= widget.id.to_s %>);
