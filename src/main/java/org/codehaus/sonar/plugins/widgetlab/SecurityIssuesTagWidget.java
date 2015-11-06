@@ -21,18 +21,10 @@ package org.codehaus.sonar.plugins.widgetlab;
 
 import org.sonar.api.web.*;
 
-
 @UserRole(UserRole.USER)
 @Description("Issues tags for security-related issues")
 @WidgetCategory({"Technical Debt"})
 public class SecurityIssuesTagWidget extends AbstractRubyTemplate implements RubyRailsWidget {
-
-
-  @Override
-  protected String getTemplatePath() {
-
-    return "/security_issues_tag_widget.html.erb";
-  }
 
   @Override
   public String getId() {
@@ -42,5 +34,10 @@ public class SecurityIssuesTagWidget extends AbstractRubyTemplate implements Rub
   @Override
   public String getTitle() {
     return "Project Security Issues Tags";
+  }
+
+  @Override
+  protected String getTemplatePath() {
+    return "/security_issues_tag_widget.html.erb";
   }
 }

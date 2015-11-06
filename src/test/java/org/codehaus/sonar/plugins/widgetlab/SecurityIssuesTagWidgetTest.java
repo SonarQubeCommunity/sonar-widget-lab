@@ -25,9 +25,11 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 public class SecurityIssuesTagWidgetTest {
+
   @Test
   public void testWidgetDefinition() {
     SecurityIssuesTagWidget widget = new SecurityIssuesTagWidget();
+
     assertThat(widget.getId(), notNullValue());
     assertThat(widget.getTitle(), notNullValue());
     assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());

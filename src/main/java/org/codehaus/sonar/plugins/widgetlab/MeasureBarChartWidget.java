@@ -48,11 +48,6 @@ public class MeasureBarChartWidget extends AbstractRubyTemplate implements RubyR
   public static final String PERIOD_PROPERTY = "period";
 
   @Override
-  protected String getTemplatePath() {
-    return "/measure_bar_chart_widget.html.erb";
-  }
-
-  @Override
   public String getId() {
     return "measure_bar_chart";
   }
@@ -60,5 +55,10 @@ public class MeasureBarChartWidget extends AbstractRubyTemplate implements RubyR
   @Override
   public String getTitle() {
     return "Measure History as Bar Chart";
+  }
+
+  @Override
+  protected String getTemplatePath() {
+    return "/measure_bar_chart_widget.html.erb";
   }
 }

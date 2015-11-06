@@ -23,12 +23,12 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
-
 public class DifferentialDropdownWidgetTest {
 
   @Test
   public void testWidgetDefinition() {
     DifferentialDropdownWidget widget = new DifferentialDropdownWidget();
+    
     assertThat(widget.getId(), notNullValue());
     assertThat(widget.getTitle(), notNullValue());
     assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());

@@ -26,24 +26,27 @@ import org.sonar.api.web.*;
 @WidgetCategory({"Global"})
 @WidgetScope("GLOBAL")
 @WidgetProperties({
-    @WidgetProperty(key = "userText",
-        description = "Text to display in widget",
-        type=WidgetPropertyType.TEXT
-    ),
-    @WidgetProperty(key = "widgetTitle",
-        description = "Widget title. Will be displayed in a bar across the top."
-    ),
-    @WidgetProperty(key = "isMarkdown",
-        description = "Check to have text rendered as markdown. (<a href='#' onclick=\"window.open(baseUrl + '/markdown/help','markdown','height=300,width=600,scrollbars=1,resizable=1');return false;\">Markdown help</a>)",
-        type=WidgetPropertyType.BOOLEAN
-    )
+  @WidgetProperty(key = "userText",
+    description = "Text to display in widget",
+    type = WidgetPropertyType.TEXT
+  ),
+  @WidgetProperty(key = "widgetTitle",
+    description = "Widget title. Will be displayed in a bar across the top."
+  ),
+  @WidgetProperty(
+    key = "isMarkdown",
+    description = "Check to have text rendered as markdown. (<a href='#' onclick=\"window.open(baseUrl + '/markdown/help','markdown','height=300,width=600,scrollbars=1,resizable=1');return false;\">Markdown help</a>)",
+    type = WidgetPropertyType.BOOLEAN
+  )
 })
-public class HtmlWidget  extends AbstractRubyTemplate implements RubyRailsWidget {
+public class HtmlWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
+  @Override
   public String getId() {
     return "user-text";
   }
 
+  @Override
   public String getTitle() {
     return "User Text Display";
   }
@@ -51,7 +54,6 @@ public class HtmlWidget  extends AbstractRubyTemplate implements RubyRailsWidget
   @Override
   protected String getTemplatePath() {
     return "/html_widget.html.erb";
-
   }
 
 }

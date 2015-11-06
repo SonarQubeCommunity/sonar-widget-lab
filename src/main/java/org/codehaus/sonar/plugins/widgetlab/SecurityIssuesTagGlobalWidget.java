@@ -28,20 +28,17 @@ import org.sonar.api.web.*;
 public class SecurityIssuesTagGlobalWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
   @Override
-  protected String getTemplatePath() {
-
-    return "/security_issues_tag_global_widget.html.erb";
-  }
-
-  @Override
   public String getId() {
-
     return "security_issues_tag_global";
   }
 
   @Override
   public String getTitle() {
-
     return "Global Security Issues Tags";
+  }
+
+  @Override
+  protected String getTemplatePath() {
+    return "/security_issues_tag_global_widget.html.erb";
   }
 }

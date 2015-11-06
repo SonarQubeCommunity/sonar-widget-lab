@@ -24,11 +24,12 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-
 public class AltRulesComplianceWidgetTest {
+
   @Test
   public void testWidgetDefinition() {
     AltRulesComplianceWidget widget = new AltRulesComplianceWidget();
+    
     assertThat(widget.getId(), notNullValue());
     assertThat(widget.getTitle(), notNullValue());
     assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());

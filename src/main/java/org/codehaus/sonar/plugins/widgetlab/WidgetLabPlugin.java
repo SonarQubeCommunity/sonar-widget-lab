@@ -31,10 +31,15 @@ import org.sonar.api.SonarPlugin;
  */
 public class WidgetLabPlugin extends SonarPlugin {
 
+  @Override
   public List getExtensions() {
-    return Arrays.asList(AltRulesComplianceWidget.class, HtmlWidget.class,
-      DifferentialDropdownWidget.class, SecurityIssuesTagWidget.class,
-      SecurityIssuesTagGlobalWidget.class, MeasureBarChartWidget.class);
+    return Arrays.asList(
+      AltRulesComplianceWidget.class,
+      HtmlWidget.class,
+      DifferentialDropdownWidget.class,
+      SecurityIssuesTagWidget.class,
+      SecurityIssuesTagGlobalWidget.class,
+      MeasureBarChartWidget.class);
   }
 
 }

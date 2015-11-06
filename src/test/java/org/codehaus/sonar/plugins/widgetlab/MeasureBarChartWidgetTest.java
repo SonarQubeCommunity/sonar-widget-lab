@@ -19,27 +19,20 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
-import org.sonar.api.web.*;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
-@UserRole(UserRole.USER)
-@Description("A differential dropdown for global dashboards.")
-@WidgetCategory({"Global"})
-@WidgetScope("GLOBAL")
-public class DifferentialDropdownWidget extends AbstractRubyTemplate implements RubyRailsWidget {
+import org.junit.Test;
 
-  @Override
-  public String getId() {
-    return "differential-dropdown";
-  }
+public class MeasureBarChartWidgetTest {
 
-  @Override
-  public String getTitle() {
-    return "Differential Dropdown";
-  }
-
-  @Override
-  protected String getTemplatePath() {
-    return "/differential_dropdown_widget.html.erb";
+  @Test
+  public void testWidgetDefinition() {
+    MeasureBarChartWidget widget = new MeasureBarChartWidget();
+    
+    assertThat(widget.getId(), notNullValue());
+    assertThat(widget.getTitle(), notNullValue());
+    assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());
   }
 
 }

@@ -25,24 +25,25 @@ import org.sonar.api.web.*;
 @Description("Shows weighted issues, in addition to Rules Compliance Index.")
 @WidgetCategory({"Technical Debt"})
 @WidgetProperties({
-    @WidgetProperty(key = "showCompliance",
-        description = "Show Rules Compliance",
-        type=WidgetPropertyType.BOOLEAN,
-        defaultValue = "true"
-    ),
-    @WidgetProperty(key = "showTechDebt",
-        description = "Show Technical Debt",
-        type=WidgetPropertyType.BOOLEAN,
-        defaultValue = "true"
-    )
+  @WidgetProperty(key = "showCompliance",
+    description = "Show Rules Compliance",
+    type = WidgetPropertyType.BOOLEAN,
+    defaultValue = "true"
+  ),
+  @WidgetProperty(key = "showTechDebt",
+    description = "Show Technical Debt",
+    type = WidgetPropertyType.BOOLEAN,
+    defaultValue = "true"
+  )
 })
-
 public class AltRulesComplianceWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
+  @Override
   public String getId() {
     return "rules-alt";
   }
 
+  @Override
   public String getTitle() {
     return "Alt Rules Compliance";
   }

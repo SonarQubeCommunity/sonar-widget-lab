@@ -23,19 +23,19 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-
 /**
  *
  * @author gcampb2
  */
 public class HtmlWidgetTest {
+
   @Test
   public void testWidgetDefinition() {
     HtmlWidget widget = new HtmlWidget();
+    
     assertThat(widget.getId(), notNullValue());
     assertThat(widget.getTitle(), notNullValue());
     assertThat(widget.getTemplatePath(), notNullValue());
-
     assertThat(getClass().getResource(widget.getTemplatePath()), notNullValue());
   }
 
