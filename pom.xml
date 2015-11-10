@@ -3,10 +3,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.codehaus.sonar-plugins</groupId>
+    <groupId>org.sonarsource.parent</groupId>
     <artifactId>parent</artifactId>
-    <version>18</version>
-    <relativePath>../parent</relativePath>
+    <version>24</version>
   </parent>
 
   <artifactId>sonar-widget-lab-plugin</artifactId>
@@ -17,6 +16,7 @@
   <description>Additional widgets</description>
   <url>http://redirect.sonarsource.com/plugins/widgetlab.html</url>
   <inceptionYear>2012</inceptionYear>
+
   <organization>
     <name>Shaw Industries</name>
     <url>http://shawfloors.com</url>
