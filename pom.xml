@@ -8,8 +8,8 @@
     <version>24</version>
   </parent>
 
-  <artifactId>sonar-widget-lab</artifactId>
-  <groupId>org.sonarsource.sonar-plugins.widget-lab</groupId>
+  <artifactId>sonar-widget-lab-plugin</artifactId>
+  <groupId>org.sonarsource.widget-lab</groupId>
   <version>1.9-SNAPSHOT</version>
   <packaging>sonar-plugin</packaging>
 
