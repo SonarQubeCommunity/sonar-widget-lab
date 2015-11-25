@@ -52,5 +52,4 @@ else
   # in Maven local repository
   mvn verify -Dmaven.test.redirectTestOutputToFile=false -B -e -V
 fi
-;;
 
