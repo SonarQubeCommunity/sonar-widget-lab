@@ -19,21 +19,28 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
-import org.sonar.api.web.*;
+import org.sonar.api.web.AbstractRubyTemplate;
+import org.sonar.api.web.Description;
+import org.sonar.api.web.RubyRailsWidget;
+import org.sonar.api.web.UserRole;
+import org.sonar.api.web.WidgetCategory;
+import org.sonar.api.web.WidgetProperties;
+import org.sonar.api.web.WidgetProperty;
+import org.sonar.api.web.WidgetPropertyType;
 
 @UserRole(UserRole.USER)
 @Description("Shows weighted issues, in addition to Rules Compliance Index.")
 @WidgetCategory({"Technical Debt"})
 @WidgetProperties({
   @WidgetProperty(key = "showCompliance",
-    description = "Show Rules Compliance",
     type = WidgetPropertyType.BOOLEAN,
-    defaultValue = "true"
+    defaultValue = "true",
+    description = "Show Rules Compliance"
   ),
   @WidgetProperty(key = "showTechDebt",
-    description = "Show Technical Debt",
     type = WidgetPropertyType.BOOLEAN,
-    defaultValue = "true"
+    defaultValue = "true",
+    description = "Show Technical Debt"
   )
 })
 public class AltRulesComplianceWidget extends AbstractRubyTemplate implements RubyRailsWidget {

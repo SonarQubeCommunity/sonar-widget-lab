@@ -25,7 +25,6 @@ import java.util.List;
 import org.sonar.api.SonarPlugin;
 
 /**
- *
  * @author gcampb2
  * @author Patroklos Papapetrou
  */

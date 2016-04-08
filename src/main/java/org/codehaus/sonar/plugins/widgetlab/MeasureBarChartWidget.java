@@ -32,14 +32,17 @@ import org.sonar.api.web.WidgetPropertyType;
 @Description("Display a measure history in a bar chart")
 @WidgetCategory({"Measures"})
 @WidgetProperties({
-  @WidgetProperty(key = MeasureBarChartWidget.MEASURE_PROPERTY,
-    description = "Measure",
+  @WidgetProperty(
+    key = MeasureBarChartWidget.MEASURE_PROPERTY,
+    type = WidgetPropertyType.METRIC,
     defaultValue = "sqale_index",
-    type = WidgetPropertyType.METRIC),
-  @WidgetProperty(key = MeasureBarChartWidget.PERIOD_PROPERTY,
-    description = "Period",
+    description = "Measure"
+  ),
+  @WidgetProperty(
+    key = MeasureBarChartWidget.PERIOD_PROPERTY,
     type = WidgetPropertyType.SINGLE_SELECT_LIST,
     defaultValue = "Y",
+    description = "Period",
     options = {"Y", "S", "Q", "M", "W"}),
 })
 public class MeasureBarChartWidget extends AbstractRubyTemplate implements RubyRailsWidget {

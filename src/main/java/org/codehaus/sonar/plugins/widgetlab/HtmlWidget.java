@@ -19,24 +19,33 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
-import org.sonar.api.web.*;
+import org.sonar.api.web.AbstractRubyTemplate;
+import org.sonar.api.web.Description;
+import org.sonar.api.web.RubyRailsWidget;
+import org.sonar.api.web.UserRole;
+import org.sonar.api.web.WidgetCategory;
+import org.sonar.api.web.WidgetProperties;
+import org.sonar.api.web.WidgetProperty;
+import org.sonar.api.web.WidgetPropertyType;
+import org.sonar.api.web.WidgetScope;
 
 @UserRole(UserRole.USER)
 @Description("Displays the configured text. Intended to enable dashboard description.")
 @WidgetCategory({"Global"})
 @WidgetScope("GLOBAL")
 @WidgetProperties({
-  @WidgetProperty(key = "userText",
-    description = "Text to display in widget",
-    type = WidgetPropertyType.TEXT
+  @WidgetProperty(
+    key = "userText",
+    type = WidgetPropertyType.TEXT,
+    description = "Text to display in widget"
   ),
   @WidgetProperty(key = "widgetTitle",
     description = "Widget title. Will be displayed in a bar across the top."
   ),
   @WidgetProperty(
     key = "isMarkdown",
-    description = "Check to have text rendered as markdown. (<a href='#' onclick=\"window.open(baseUrl + '/markdown/help','markdown','height=300,width=600,scrollbars=1,resizable=1');return false;\">Markdown help</a>)",
-    type = WidgetPropertyType.BOOLEAN
+    type = WidgetPropertyType.BOOLEAN,
+    description = "Check to have text rendered as markdown. (<a href='#' onclick=\"window.open(baseUrl + '/markdown/help','markdown','height=300,width=600,scrollbars=1,resizable=1');return false;\">Markdown help</a>)"
   )
 })
 public class HtmlWidget extends AbstractRubyTemplate implements RubyRailsWidget {
