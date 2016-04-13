@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.sonarsource.parent</groupId>
     <artifactId>parent</artifactId>
-    <version>31</version>
+    <version>24</version>
   </parent>
 
   <artifactId>sonar-widget-lab-plugin</artifactId>
@@ -45,7 +45,6 @@
   <properties>
     <sonar.version>4.5.1</sonar.version>
     <sonar.pluginClass>org.codehaus.sonar.plugins.widgetlab.WidgetLabPlugin</sonar.pluginClass>
-    <gitRepositoryName>sonar-widget-lab</gitRepositoryName>
   </properties>
 
   <issueManagement>
