@@ -48,8 +48,8 @@
   </properties>
 
   <issueManagement>
-    <system>JIRA</system>
-    <url>http://jira.codehaus.org/browse/SONARWIDLB</url>
+    <system>GitHub Issues</system>
+    <url>https://github.com/SonarQubeCommunity/sonar-widget-lab/issues</url>
   </issueManagement>
 
   <dependencies>
@@ -69,9 +69,9 @@
   </dependencies>
 
   <scm>
-    <connection>scm:git:https://github.com/SonarCommunity/sonar-widget-lab.git</connection>
-    <developerConnection>scm:git:git@github.com:SonarCommunity/sonar-widget-lab.git</developerConnection>
-    <url>https://github.com/SonarCommunity/sonar-widget-lab</url>
+    <connection>scm:git:https://github.com/SonarQubeCommunity/sonar-widget-lab.git</connection>
+    <developerConnection>scm:git:git@github.com:SonarQubeCommunity/sonar-widget-lab.git</developerConnection>
+    <url>https://github.com/SonarQubeCommunity/sonar-widget-lab</url>
     <tag>HEAD</tag>
   </scm>
 
