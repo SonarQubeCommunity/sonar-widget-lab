@@ -17,6 +17,6 @@ From SonarQube version 4.5, the use of this widget requires the [Issues Density 
 * Bar Chart Widget - A project widget showing history of a measure as Bar Chart.  The period of time can be configured in the widget or changed directly while viewing the dashboard. The measure value is the last one of the displayed period. Ex: while showing a full year of history, each bar represents the value of the measure as it was during the last analysis of the month.
 
 ## Usage
-This plugin calculates no new metrics, so all you have to do is add the new widgets to your dashboards.
+Just add the new widgets to your dashboards.
 
 
