@@ -2,11 +2,18 @@
 
 set -euo pipefail
 
+function configureTravis {
+  mkdir ~/.local
+  curl -sSL https://github.com/SonarSource/travis-utils/tarball/v25 | tar zx --strip-components 1 -C ~/.local
+  source ~/.local/bin/install
+}
+
 function strongEcho {
   echo ""
   echo "================ $1 ================="
 }
 
+configureTravis
 if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
   strongEcho 'Build and analyze commit in master'
   mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar \
