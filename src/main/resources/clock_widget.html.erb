@@ -1,0 +1,10 @@
+<%
+  # other mechanisms kick in when you set this global var.
+  # the value will be displayed in the title bar across the top of the widget
+  @widget_title=widget_properties['widgetTitle']
+%>
+<script src="<%= ApplicationController.root_context -%>/static/widgetlab/widget_clock.js?v=<%= sonar_version -%>"></script>
+<div class="dashbox">
+
+  <span id="widget_lab_clock"></span>
+</div>

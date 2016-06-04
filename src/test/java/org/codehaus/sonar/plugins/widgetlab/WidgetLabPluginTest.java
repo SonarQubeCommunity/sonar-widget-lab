@@ -19,11 +19,11 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 public class WidgetLabPluginTest {
 
@@ -36,6 +36,6 @@ public class WidgetLabPluginTest {
 
   @Test
   public void testPluginDefinition() {
-    assertThat(plugin.getExtensions().size(), equalTo(5));
+    assertThat(plugin.getExtensions().size(), equalTo(6));
   }
 }
