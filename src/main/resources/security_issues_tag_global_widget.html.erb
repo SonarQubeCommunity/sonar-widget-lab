@@ -2,6 +2,7 @@
   containerId = 'security_issues_global_tag' + widget.id.to_s
   maxItems = 500
   title = message('widget.security_issues_tag_global.title')
+  tagsOfInterest = widget_properties['tagsOfInterest'].gsub(/ /,'').gsub(/,/, '","')
 %>
 
 <div class="histogram-widget" id="<%= containerId %>">
@@ -16,11 +17,7 @@
 <script>
   (function () {
 
-    var tagsOfInterest = ["owasp-top10", "sans-top25",
-                  "owasp-a1", "owasp-a2", "owasp-a3", "owasp-a4", "owasp-a5",
-                  "owasp-a6", "owasp-a7", "owasp-a8", "owasp-a9", "owasp-a10",
-                  "sans-top25-insecure", "sans-top25-porous", "sans-top25-risky",
-                  "error-handling", "multi-threading","injection", "denial-of-service"];
+    var tagsOfInterest = ["<%=tagsOfInterest%>"];
 
     var queryParams = [
           'ps=1',

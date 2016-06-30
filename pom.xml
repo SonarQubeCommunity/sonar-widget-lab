@@ -10,7 +10,7 @@
 
   <artifactId>sonar-widget-lab-plugin</artifactId>
   <groupId>org.sonarsource.widget-lab</groupId>
-  <version>1.9-SNAPSHOT</version>
+  <version>1.11-SNAPSHOT</version>
   <packaging>sonar-plugin</packaging>
 
   <name>Widget Lab</name>
@@ -39,6 +39,10 @@
     <developer>
       <id>ppapapetrou</id>
       <name>Patroklos Papapetrou</name>
+    </developer>
+    <developer>
+        <id>InfoSec812</id>
+        <name>Deven Phillips</name>
     </developer>
   </developers>
 

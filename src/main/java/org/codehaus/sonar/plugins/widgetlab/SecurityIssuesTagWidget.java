@@ -19,15 +19,21 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
-import org.sonar.api.web.AbstractRubyTemplate;
-import org.sonar.api.web.Description;
-import org.sonar.api.web.RubyRailsWidget;
-import org.sonar.api.web.UserRole;
-import org.sonar.api.web.WidgetCategory;
+import org.sonar.api.web.*;
 
 @UserRole(UserRole.USER)
 @Description("Issues tags for security-related issues")
 @WidgetCategory({"Technical Debt"})
+@WidgetProperties({
+  @WidgetProperty(
+    key = "tagsOfInterest",
+    type = WidgetPropertyType.TEXT,
+    description = "Which tags should be included in this display",
+    defaultValue = "owasp-top10, sans-top25, owasp-a1, owasp-a2, owasp-a3, owasp-a4, owasp-a5, owasp-a6, owasp-a7, " +
+            "owasp-a8, owasp-a9, owasp-a10, sans-top25-insecure, sans-top25-porous, sans-top25-risky, error-handling, " +
+            "multi-threading,injection, denial-of-service"
+  )
+})
 public class SecurityIssuesTagWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
   @Override

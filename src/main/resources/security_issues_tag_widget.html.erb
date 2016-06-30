@@ -2,6 +2,7 @@
   containerId = 'security_issues_tag' + widget.id.to_s
   maxItems = 500
   title = message('widget.security_issues_tag.title')
+  tagsOfInterest = widget_properties['tagsOfInterest'].gsub(/ /,'').gsub(/,/, '","')
 
   if has_role?(:user, @project) && !Internal.issues.listTagsForComponent(@project.uuid, maxItems).isEmpty()
     search_options = {
@@ -18,7 +19,7 @@
 %>
 
 <div class="histogram-widget" id="<%= containerId %>">
-  <!--[if lte IE 8 ]> <h3><%= message('widget.unsupported_browser_warning') -%></h3> <![endif]-->
+  <!--[if lte IE 8 ]> <h3><%= message('widget.unsupported_browser_warning') %></h3> <![endif]-->
 
   <!--[if (gte IE 9)|!(IE)]><!-->
   <h3 style="margin-bottom: 5px;"><%= title -%></h3>
@@ -30,11 +31,7 @@
 <script>
   (function () {
 
-    var tagsOfInterest = ["owasp-top10", "sans-top25",
-                  "owasp-a1", "owasp-a2", "owasp-a3", "owasp-a4", "owasp-a5",
-                  "owasp-a6", "owasp-a7", "owasp-a8", "owasp-a9", "owasp-a10",
-                  "sans-top25-insecure", "sans-top25-porous", "sans-top25-risky",
-                  "error-handling", "multi-threading","injection", "denial-of-service"];
+    var tagsOfInterest = ["<%= tagsOfInterest%>"];
 
     var createdAfter = '';
     <% if @dashboard_configuration.selected_period? -%>

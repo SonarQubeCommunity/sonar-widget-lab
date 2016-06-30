@@ -19,17 +19,22 @@
  */
 package org.codehaus.sonar.plugins.widgetlab;
 
-import org.sonar.api.web.AbstractRubyTemplate;
-import org.sonar.api.web.Description;
-import org.sonar.api.web.RubyRailsWidget;
-import org.sonar.api.web.UserRole;
-import org.sonar.api.web.WidgetCategory;
-import org.sonar.api.web.WidgetScope;
+import org.sonar.api.web.*;
 
 @UserRole(UserRole.USER)
 @Description("Issues tags for security-related issues global counts")
 @WidgetCategory({"Technical Debt"})
 @WidgetScope("GLOBAL")
+@WidgetProperties({
+  @WidgetProperty(
+    key = "tagsOfInterest",
+    type = WidgetPropertyType.TEXT,
+    description = "Which tags should be included in this display",
+    defaultValue = "owasp-top10, sans-top25, owasp-a1, owasp-a2, owasp-a3, owasp-a4, owasp-a5, owasp-a6, owasp-a7, " +
+            "owasp-a8, owasp-a9, owasp-a10, sans-top25-insecure, sans-top25-porous, sans-top25-risky, error-handling, " +
+            "multi-threading,injection, denial-of-service"
+  )
+})
 public class SecurityIssuesTagGlobalWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
   @Override
