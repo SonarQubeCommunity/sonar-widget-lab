@@ -30,6 +30,8 @@ import java.util.List;
  */
 public class WidgetLabPlugin extends SonarPlugin {
 
+  // TODO
+
   @Override
   public List getExtensions() {
     return Arrays.asList(
